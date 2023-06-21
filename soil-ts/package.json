@@ -1,0 +1,29 @@
+{
+  "name": "soil-ts",
+  "version": "1.0.2",
+  "description": "一个基于 lodash 构建的 Ae 脚本开发工具库",
+  "keywords": [
+    "Adobe",
+    "After Effects",
+    "ExtendScript",
+    "TypeScript",
+    "util"
+  ],
+  "homepage": "https://github.com/RaymondClr",
+  "license": "MIT",
+  "type": "module",
+  "main": "soil.tsx",
+  "sideEffects": false,
+  "author": "Raymond Yan <raymondclr@outlook.com>",
+  "contributors": [],
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "types-for-adobe": "^7.0.12",
+    "@rollup/plugin-terser": "^0.4.0",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "rollup": "^3.18.0",
+    "tslib": "^2.5.0"
+  }
+}

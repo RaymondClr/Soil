@@ -1,0 +1,75 @@
+{
+    "entryPoints": ["soil-ts/soil.tsx", "soil-ts/@types/soil.d.tsx", "soil-ts/@types/tree.d.tsx"]
+}
+
+// --basePath                         指定在显示文件路径时要使用的基本路径。
+// --blockTags                        TypeDoc在解析注释时应识别的块标签。
+// --cacheBust                        在指向静态资源的链接中包含生成时间。
+// --categorizeByGroup                指定是否在组级别上进行分类。
+// --categoryOrder                    指定类别出现的顺序。 *表示未列出的类别的相对顺序。
+// --cleanOutputDir                   如果设置，TypeDoc将在写入输出之前删除输出目录。
+// --cname                            设置CNAME文件文本，对于GitHub页面上的自定义域非常有用。
+// --commentStyle                     确定TypeDoc如何搜索注释。
+// --customCss                        主题要导入的自定义CSS文件的路径。
+// --darkHighlightTheme               指定暗模式下的代码突出显示主题。
+// --defaultCategory                  指定没有类别的反映的默认类别。
+// --disableSources                   禁用在记录文档时设置反映的源。
+// --emit                             指定TypeDoc应该发出什么：“docs”，“both”或“none”。
+// --entryPoints                      文档的入口点。
+// --entryPointStrategy               要将入口点转换为文档模块所使用的策略。
+// --exclude                          定义在扩展作为入口点指定的目录时要排除的模式。
+// --excludeExternals                 防止被外部解析的符号被记录。
+// --excludeInternal                  防止使用@internal标记的符号被记录。
+// --excludeNotDocumented             防止未显式记录的符号出现在结果中。
+// --excludeNotDocumentedKinds        指定可以由excludeNotDocumented删除的反射类型。
+// --excludePrivate                   忽略私有变量和方法。
+// --excludeProtected                 忽略受保护的变量和方法。
+// --excludeReferences                如果一个符号被导出多次，则忽略除第一个导出以外的所有导出。
+// --excludeTags                      从doc注释中删除列出的块/修饰符标记。
+// --externalPattern                  定义应被视为外部的文件模式。
+// --externalSymbolLinkMappings       定义不包含在文档中的符号的自定义链接。
+// --gaID                             设置Google Analytics跟踪ID并激活追踪代码。
+// --githubPages                      生成一个.nojekyll文件以防止GitHub Pages中的404错误。 默认值为true。
+// --gitRemote                        链接到GitHub / Bitbucket源代码的远程。
+// --gitRevision                      链接到GitHub / Bitbucket源文件时使用指定的修订版而不是最后一次修订。
+// --groupOrder                       指定组出现的顺序。 *表示未列出的组的相对顺序。
+// --help                             打印此消息。
+// --hideGenerator                    不要在页面末尾打印TypeDoc链接。
+// --hideParameterTypesInTitle        在签名标题中隐藏参数类型，以便更轻松地扫描。
+// --htmlLang                         在生成的HTML标记中设置语言属性。
+// --includes                         指定要查找包含文档的位置（在注释中使用[[include:FILENAME]]）。
+// --includeVersion                   将软件包版本添加到项目名称中。
+// --inlineTags                       TypeDoc在解析注释时应识别的内联标签。
+// --intentionallyNotExported         不应生成“引用但未记录”的警告的类型列表。
+// --jsDocCompatibility               设置用于增加与JSDoc注释相似性的注释解析兼容性选项。
+// --json                             指定描述项目的JSON文件的位置和文件名。
+// --kindSortOrder                    指定在指定“kind”时反射的排序顺序。
+// --lightHighlightTheme              指定浅色模式下的代码突出显示主题。
+// --logLevel                         指定应使用哪个日志级别。
+// --media                            指定应复制到输出目录的媒体文件的位置。
+// --modifierTags                     TypeDoc在解析注释时应识别的修饰符标记。
+// --name                             设置将在模板标题中使用的项目名称。
+// --navigation                       确定如何组织导航侧边栏。
+// --navigationLinks                  定义要包含在标题中的链接。
+// --options                          指定应加载的json选项文件。 如果未指定，TypeDoc将在当前目录中查找'typedoc.json'。
+// --out                              指定应写入文档的位置。
+// --plugin                           指定应加载的npm插件。省略以加载所有已安装的插件。
+// --preserveWatchOutput              如果设置，TypeDoc将不会在编译运行之间清除屏幕。
+// --pretty                           指定是否应使用制表符格式化输出JSON。
+// --readme                           应显示在索引页面上的自述文件的路径。传递“none”以禁用索引页面并从全局页面开始文档。
+// --requiredToBeDocumented           必须记录的反射种类列表
+// --searchInComments                 如果设置，搜索索引还将包括注释。这将大大增加搜索索引的大小。
+// --showConfig                       打印解析的配置并退出。
+// --sidebarLinks                     定义要包含在侧边栏中的链接。
+// --skipErrorChecking                在生成文档之前不运行TypeScript的类型检查。
+// --sort                             指定记录值的排序策略。
+// --sourceLinkTemplate               指定生成源代码URL时要使用的链接模板。如果未设置，将自动使用git远程。支持{path}，{line}，{gitRevision}占位符。
+// --theme                            指定用于呈现文档的主题名称
+// --titleLink                        设置标题中指向的链接。默认为文档主页。
+// --treatValidationWarningsAsErrors  如果设置，则在验证期间发出的警告将被视为错误。此选项不能用于禁用验证警告的treatWarningsAsErrors。
+// --treatWarningsAsErrors            如果设置，所有警告都将被视为错误。
+// --tsconfig                         指定应加载的TypeScript配置文件。如果未指定，TypeDoc将在当前目录中查找“tsconfig.json”。
+// --useTsLinkResolution              当确定@link标记的指向位置时，使用TypeScript的链接解析。这仅适用于JSDoc样式注释。
+// --validation                       指定TypeDoc应在生成的文档上执行的哪些验证步骤。
+// --version                          打印TypeDoc的版本。
+// --watch                            在更改文件时监视文件并重新构建文档。

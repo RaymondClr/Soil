@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "target": "es3",
+        "jsx": "preserve",
+        "noLib": true,
+        "module": "es6",
+        "types": ["types-for-adobe/AfterEffects/22.0"],
+        "outDir": "./dist",
+        "removeComments": true,
+        "strict": true,
+        "strictNullChecks": true,
+        "ignoreDeprecations": "5.0"
+    }
+}

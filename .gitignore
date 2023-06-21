@@ -1,0 +1,5 @@
+node_modules/
+soil-ts/utils
+soil-ts/lodash/.unused
+soil-ts/lodash/basic/.unused
+soil-ts/lodash/_internal/.unused
