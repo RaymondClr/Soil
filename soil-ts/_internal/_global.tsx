@@ -13,7 +13,6 @@ export const pathTrash = Folder.trash;
 export const pathUserData = Folder.userData;
 
 export const IS_KEY_LABEL_EXISTS = parseFloat(app.version) > 22.5;
-export const SPATIAL_PROPERTY_VALUE_TYPE = [6413 /* PropertyValueType.ThreeD_SPATIAL */, 6415 /* PropertyValueType.TwoD_SPATIAL */] as const;
 export const PROPERTY_INTERPOLATION_TYPE = [6612 /* KeyframeInterpolationType.LINEAR */, 6613 /* KeyframeInterpolationType.BEZIER */, 6614 /* KeyframeInterpolationType.HOLD */] as const;
 
 export const reScriptFileName = /\.(js|jsx|jsxbin)$/i;

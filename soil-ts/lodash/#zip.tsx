@@ -15,7 +15,7 @@ import unzip from "./#unzip";
  * zip(['a', 'b'], [1, 2], [true, false])
  * // => [['a', 1, true], ['b', 2, false]]
  */
-function zip<T>(...arrays: Array<Array<T>>): Array<Array<T>> {
+function zip<T extends Array<any>>(...arrays: Array<T>): Array<Array<T[number]>> {
     return unzip(arrays);
 }
 

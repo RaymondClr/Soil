@@ -18,8 +18,7 @@ import isWindow from "./isWindow";
 
 const root = this;
 const global = $.global;
-const tree: Tree = { version: "alpha 0.0.6", parse: runInContext };
-const windowKeeper = [];
+const tree: Tree = { version: "beta 1.0.0", parse: runInContext, windows: [] };
 const layoutModeFlags = [0, 1, 2];
 const validContainerType = ["dialog", "palette", "window"];
 const mainContainerDefault: ContainerDefault = { dockable: true, show: true, singleton: false };
@@ -449,7 +448,7 @@ function runInContext(resource: AnyObject): MainContainer {
     addGetElementMethods([Window, Panel, Group]);
     const resource_ = isObject(resource) ? resource : {};
     const container = buildWindow.apply(null, initBuildValues(resource_, tree));
-    windowKeeper.push(container);
+    tree.windows.push(container);
     return container;
 }
 

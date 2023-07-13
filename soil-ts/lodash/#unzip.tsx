@@ -1,3 +1,4 @@
+import baseProperty from "./_internal/_baseProperty";
 import filter from "./#filter";
 import map from "./#map";
 import isArrayLikeObject from "./#isArrayLikeObject";
@@ -20,7 +21,7 @@ import isArrayLikeObject from "./#isArrayLikeObject";
  * unzip(zipped)
  * // => [['a', 'b'], [1, 2], [true, false]]
  */
-function unzip<T>(array: Array<Array<T>>): Array<Array<T>> {
+function unzip<T extends Array<any>>(array: Array<T>): Array<Array<T[number]>> {
     if (!(array != null && array.length)) {
         return [];
     }
@@ -35,7 +36,7 @@ function unzip<T>(array: Array<Array<T>>): Array<Array<T>> {
     let index = -1;
     const result = new Array(length);
     while (++index < length) {
-        result[index] = map(array, (value, index) => value[index]);
+        result[index] = map(array, baseProperty(index));
     }
     return result;
 }

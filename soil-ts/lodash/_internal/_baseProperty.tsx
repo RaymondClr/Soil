@@ -5,8 +5,8 @@
  * @param {string} key The key of the property to get.
  * @returns {Function} Returns the new accessor function.
  */
-function baseProperty(key: string): <T>(object: Dictionary<T>) => T | undefined {
-    return function <T>(object: Dictionary<T>): T | undefined {
+function baseProperty(key: PropertyName): (object: any) => any {
+    return function (object: any): any {
         return object == null ? undefined : object[key];
     };
 }

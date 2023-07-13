@@ -1,4 +1,4 @@
-function findItem<T extends Project | FolderItem>(collection: T, iteratee: CollectionIterator<_ItemClasses, T, _ItemClasses | undefined>) {
+function findItem<T extends Project | FolderItem>(collection: T, iteratee: CollectionIterator<_ItemClasses, T, boolean>) {
     let index = 0;
     const length = collection.numItems + 1;
     const items = collection.items;

@@ -88,6 +88,7 @@ declare type ElementCollector = {
 declare type Tree = {
     version: string;
     parse: (resource: AnyObject) => MainContainer;
+    windows: MainContainer[];
     context?: any;
     layoutMode?: number;
 };

@@ -1,4 +1,4 @@
-function subtractArray<T extends TwoDPoint | ThreeDPoint | number[]>(...args: T[]): T {
+function subtractArray<T extends TwoDPoint | ThreeDPoint | Array<number>>(...args: Array<T>): T {
     let argsLength = arguments.length;
     let minLength = Infinity;
     let argsIndex = -1;

@@ -111,7 +111,6 @@ declare interface ThreeDSpatialType extends PropertyClassMembers {
 
 declare type Keyframe = {
     property: Property;
-    propertyValueType: PropertyValueType;
     keyTime: number;
     keyValue: any | null;
     keySelected: boolean;
@@ -128,6 +127,7 @@ declare type Keyframe = {
     keyRoving: boolean | null;
     keyLabel: number | null;
 };
+
 declare type JsonEscape = "\b" | "\t" | "\n" | "\f" | "\r" | "\v" | '"' | "\\";
 
 declare type CollectionMembers = ItemCollection | LayerCollection | OMCollection | RQItemCollection;

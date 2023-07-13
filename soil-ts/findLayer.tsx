@@ -1,4 +1,4 @@
-function findLayer(comp: CompItem, iteratee: CollectionIterator<Layer, CompItem, Layer | undefined>) {
+function findLayer(comp: CompItem, iteratee: CollectionIterator<Layer, CompItem, boolean>) {
     let index = 0;
     const length = comp.numLayers + 1;
     const layers = comp.layers;
