@@ -15,7 +15,7 @@ import isFunction from "../#isFunction";
  * @returns {Array} Returns the new duplicate free array.
  */
 
-function baseUniq<T, S extends T>(array: Array<T>, iteratee?: (value: T) => S, comparator?: (value: S) => any): Array<T> {
+function baseUniq<T,>(array: Array<T>, iteratee?: any, comparator?: any): Array<T> {
     let index = -1;
     let includes: any = arrayIncludes;
     let isCommon = true;

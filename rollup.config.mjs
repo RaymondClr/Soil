@@ -52,6 +52,8 @@ export default {
         propertyReadSideEffects: false,
         unknownGlobalSideEffects: false,
     },
-    plugins: [typescript()],
+    plugins: [
+        typescript(),
+    ],
     context: "this",
 };

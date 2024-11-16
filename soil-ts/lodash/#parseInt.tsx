@@ -18,7 +18,7 @@ import { nativeParseInt, reTrimStart } from "./basic/_global";
  * parseInt('08')
  * // => 8
  */
-function parseInt(string: string, radix: number): number {
+function parseInt(string: string, radix?: number): number {
     if (radix == null) {
         radix = 0;
     } else if (radix) {

@@ -14,7 +14,7 @@ import repeat from "../#repeat";
  * @param {string} [chars=' '] The string used as padding.
  * @returns {string} Returns the padding for `string`.
  */
-function createPadding(length: number, chars: string): string {
+function createPadding(length: number, chars?: string): string {
     chars = chars === undefined ? " " : baseToString(chars);
     const charsLength = chars.length;
     if (charsLength < 2) {

@@ -21,7 +21,7 @@ import trimString from "./_internal/_trimString";
  * trim('-_-abc-_-', '_-')
  * // => 'abc'
  */
-function trim(string: string, chars: string): string {
+function trim(string: string, chars?: string): string {
     if (string && chars === undefined) {
         return trimString(string);
     }

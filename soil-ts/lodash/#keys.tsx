@@ -36,7 +36,7 @@ function keys<T extends object>(object: T): Array<Extract<keyof T, string>> {
     if (isArrayLike(object)) {
         return arrayLikeKeys(object) as Array<Extract<keyof T, string>>;
     }
-    let result = [];
+    let result: Array<Extract<keyof T, string>> = [];
     for (const key in object) {
         if (has(object, key)) {
             result.push(key);

@@ -17,7 +17,7 @@ import baseZipObject from "./_internal/_baseZipObject";
  * // => { 'a': 1, 'b': 2 }
  */
 function zipObject<T extends Array<PropertyName>, K extends Array<any>, U extends number = BuildIndexUnion<T["length"]>>(props: T, values: K): { [P in U as T[P]]: K[P] } {
-    return baseZipObject(props || [], values || [], assignValue);
+    return baseZipObject(props || [], values || [], assignValue) as any;
 }
 
 export default zipObject;

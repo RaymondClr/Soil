@@ -1,4 +1,4 @@
-import * as _ from "soil-ts";
+import * as _ from "../soil-ts/soil";
 
 let activeItem = _.getActiveComp();
 

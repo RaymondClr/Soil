@@ -9,7 +9,7 @@ import trimString from "./_trimString";
  * @returns {Array} Returns the property path array.
  */
 function stringToPath(string: string): Array<string> {
-    const result = [];
+    const result: Array<string> = [];
     if (string.charCodeAt(0) === charCodeOfDot) {
         result.push("");
     }

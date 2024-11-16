@@ -1,9 +1,9 @@
 {
-    "extends": "./soil-ts/tsconfig.json",
     "compilerOptions": {
-        "paths": {
-            "soil-ts": ["./soil-ts/soil.tsx"]
-        }
+        "noLib": true,
+        "ignoreDeprecations": "5.0",
+        "jsx": "preserve",
+        "types": ["types-for-adobe/AfterEffects/22.0"]
     },
-    "include": ["./soil-ts/**/*.tsx", "src/index.tsx"]
+    "include": ["src/index.tsx"]
 }

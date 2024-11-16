@@ -21,7 +21,7 @@
  * // => ['a', 'b', 'c'] (iteration order is not guaranteed)
  */
 function keysIn<T extends object>(object: T): Array<Extract<keyof T, string>> {
-    const result = [];
+    const result: Array<Extract<keyof T, string>> = [];
     for (const key in object) {
         result.push(key);
     }

@@ -7,7 +7,7 @@ import saveFrameToPng from "./saveFrameToPng";
 import secondToFrames from "./secondToFrames";
 import templateString from "./templateString";
 
-function savePngSequence(compItem: CompItem, outputPath: LooseFolder, suffix: string = compItem.name) {
+function savePngSequence(compItem: CompItem, outputPath: LooseFolder, prefix: string = compItem.name) {
     const folder = castFolder(outputPath);
     if (!folder.exists) {
         folder.create();
@@ -20,7 +20,7 @@ function savePngSequence(compItem: CompItem, outputPath: LooseFolder, suffix: st
     const frameDuration = compItem.frameDuration;
     const files = times(duraion, function (index) {
         const sequenceNumber = padStart(String(start + index), frameDigtis, "0");
-        return new File(createPath(folderPath, templateString("${0}_${1}.png", suffix, sequenceNumber)));
+        return new File(createPath(folderPath, templateString("${0}_${1}.png", prefix, sequenceNumber)));
     });
     forEach(files, function (file, index) {
         saveFrameToPng(file, compItem, index * frameDuration);

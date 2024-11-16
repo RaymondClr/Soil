@@ -31,7 +31,7 @@ function remove<T>(array: Array<T>, predicate: ArrayIterator<T, boolean>): Array
         return result;
     }
     let index = -1;
-    const indexes = [];
+    const indexes: number[] = [];
     const { length } = array;
 
     while (++index < length) {

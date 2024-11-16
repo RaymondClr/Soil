@@ -1,9 +1,9 @@
 import addProperty from "./addProperty";
-import isProperty from "./isProperty";
+import canSetPropertyValue from "./canSetPropertyValue";
 
 function setPropertyValue(rootProperty: _PropertyClasses, path: AdbePath, value: any): Property | undefined {
     const property = addProperty(rootProperty, path);
-    if (isProperty(property)) {
+    if (canSetPropertyValue(property)) {
         property.setValue(value);
         return property;
     }

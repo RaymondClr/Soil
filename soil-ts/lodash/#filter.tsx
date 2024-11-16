@@ -25,7 +25,7 @@ function filter<T, S extends T>(array: Array<T>, predicate: ArrayIteratorTypeGua
     let index = -1;
     let resIndex = 0;
     const length = array == null ? 0 : array.length;
-    const result = [];
+    const result: Array<S> = [];
 
     while (++index < length) {
         const value = array[index];

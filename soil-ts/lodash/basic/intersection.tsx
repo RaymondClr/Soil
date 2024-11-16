@@ -4,7 +4,7 @@ function intersection<T>(array: Array<T>, ...rest: Array<Array<T>>): Array<T> {
     let index = -1;
     const length = array.length;
     const argsLength = arguments.length;
-    const result = [];
+    const result: Array<T> = [];
 
     while (++index < length) {
         const value = array[index];

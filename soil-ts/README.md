@@ -23,12 +23,11 @@ package.json
     "build": "rollup -c"
   },
   "devDependencies": {
-    "soil-ts": "^1.0.0",
-    "types-for-adobe": "^7.0.12",
-    "@rollup/plugin-terser": "^0.4.0",
-    "@rollup/plugin-typescript": "^11.0.0",
-    "rollup": "^3.18.0",
-    "tslib": "^2.5.0"
+    "soil-ts": "*",
+    "@rollup/plugin-terser": "*",
+    "@rollup/plugin-typescript": "*",
+    "rollup": "*",
+    "tslib": "*"
   }
 }
 ```
@@ -53,13 +52,12 @@ tsconfig.json
 
 ```json
 {
-    "extends": "./node_modules/soil-ts/tsconfig.json",
     "compilerOptions": {
-        "paths": {
-            "soil-ts": ["./node_modules/soil-ts/soil.tsx"]
-        }
-    },
-    "include": ["node_modules/soil-ts/**/*.tsx", "./src/index.tsx"]
+        // The following are necessary compilation options
+		"jsx": "preserve",
+		"noLib": true,
+		"types": ["types-for-adobe/AfterEffects/23.0"]
+    }
 }
 ```
 

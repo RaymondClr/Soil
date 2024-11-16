@@ -1,7 +1,9 @@
 import { IS_KEY_LABEL_EXISTS } from "./_internal/_global";
 import forEach from "./lodash/#forEach";
-import canSetKeyframeVelocity from "./canSetKeyframeVelocity";
+import isNil from "./lodash/#isNil";
 import mapTemporalEaseValueToClasses from "./_internal/_mapTemporalEaseValueToClasses";
+import canSetKeyframeVelocity from "./canSetKeyframeVelocity";
+import isColorProperty from "./isColorProperty";
 import isProperty from "./isProperty";
 
 function setKeyframeValues(keyframeValues: Array<Keyframe>, targetProperty?: Property): void {
@@ -10,44 +12,44 @@ function setKeyframeValues(keyframeValues: Array<Keyframe>, targetProperty?: Pro
     }
     const sourceProperty = keyframeValues[0].property;
     const property = isProperty(targetProperty) ? targetProperty : sourceProperty;
-    if (property.propertyValueType !== sourceProperty.propertyValueType) {
-        throw new Error("Incompatible property Value types");
-    }
     forEach(keyframeValues, keyframe => {
         const keyTime = keyframe.keyTime;
         const keyValue = keyframe.keyValue;
         property.setValueAtTime(keyTime, keyValue);
     });
+    const isSpatialValue = property.isSpatial && !isColorProperty(property);
+    const canSetVelocity = canSetKeyframeVelocity(property);
     forEach(keyframeValues, keyframe => {
         const keyIndex = property.nearestKeyIndex(keyframe.keyTime);
         const keyInSpatialTangent = keyframe.keyInSpatialTangent;
         const keyOutSpatialTangent = keyframe.keyOutSpatialTangent;
         const keySpatialAutoBezier = keyframe.keySpatialAutoBezier;
         const keySpatialContinuous = keyframe.keySpatialContinuous;
-        const keyRoving = keyframe.keyRoving;
-        const keyInTemporalEase = mapTemporalEaseValueToClasses(keyframe.keyInTemporalEase);
-        const keyOutTemporalEase = mapTemporalEaseValueToClasses(keyframe.keyOutTemporalEase);
+        const keyInTemporalEase = keyframe.keyInTemporalEase;
+        const keyOutTemporalEase = keyframe.keyOutTemporalEase;
         const keyTemporalContinuous = keyframe.keyTemporalContinuous;
         const keyTemporalAutoBezier = keyframe.keyTemporalAutoBezier;
         const keyInInterpolationType = keyframe.keyInInterpolationType;
         const keyOutInterpolationType = keyframe.keyOutInterpolationType;
+        const keyRoving = keyframe.keyRoving;
         const keyLabel = keyframe.keyLabel;
-        if (property.isSpatial) {
-            property.setSpatialTangentsAtKey(keyIndex, keyInSpatialTangent as [number, number, number], keyOutSpatialTangent as [number, number, number]);
-            property.setSpatialAutoBezierAtKey(keyIndex, keySpatialAutoBezier as boolean);
-            property.setSpatialContinuousAtKey(keyIndex, keySpatialContinuous as boolean);
-            property.setRovingAtKey(keyIndex, keyRoving as boolean);
+        const keySelected = keyframe.keySelected;
+        if (isSpatialValue) {
+            !isNil(keyInSpatialTangent) && property.setSpatialTangentsAtKey(keyIndex, keyInSpatialTangent as [number, number, number], keyOutSpatialTangent as [number, number, number]);
+            !isNil(keySpatialAutoBezier) && property.setSpatialAutoBezierAtKey(keyIndex, keySpatialAutoBezier);
+            !isNil(keySpatialContinuous) && property.setSpatialContinuousAtKey(keyIndex, keySpatialContinuous);
+            !isNil(keyRoving) && property.setRovingAtKey(keyIndex, keyRoving);
         }
-        if (canSetKeyframeVelocity(property)) {
-            property.setTemporalEaseAtKey(keyIndex, keyInTemporalEase, keyOutTemporalEase);
+        if (canSetVelocity) {
+            !isNil(keyInTemporalEase) && property.setTemporalEaseAtKey(keyIndex, mapTemporalEaseValueToClasses(keyInTemporalEase), !isNil(keyOutTemporalEase) ? mapTemporalEaseValueToClasses(keyOutTemporalEase) : void 0);
         }
-        property.setTemporalContinuousAtKey(keyIndex, keyTemporalContinuous);
-        property.setTemporalAutoBezierAtKey(keyIndex, keyTemporalAutoBezier);
-        property.setInterpolationTypeAtKey(keyIndex, keyInInterpolationType, keyOutInterpolationType);
+        !isNil(keyTemporalContinuous) && property.setTemporalContinuousAtKey(keyIndex, keyTemporalContinuous);
+        !isNil(keyTemporalAutoBezier) && property.setTemporalAutoBezierAtKey(keyIndex, keyTemporalAutoBezier);
+        !isNil(keyInInterpolationType) && property.setInterpolationTypeAtKey(keyIndex, keyInInterpolationType, !isNil(keyOutInterpolationType) ? keyOutInterpolationType : void 0);
         if (IS_KEY_LABEL_EXISTS) {
-            property.setLabelAtKey(keyIndex, keyLabel as number);
+            !isNil(keyLabel) && property.setLabelAtKey(keyIndex, keyLabel);
         }
-        property.setSelectedAtKey(keyIndex, keyframe.keySelected);
+        !isNil(keySelected) && property.setSelectedAtKey(keyIndex, keySelected);
     });
 }
 

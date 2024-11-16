@@ -1,6 +1,6 @@
 {
   "name": "soil-ts",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "一个基于 lodash 构建的 Ae 脚本开发工具库",
   "keywords": [
     "Adobe",
@@ -9,21 +9,17 @@
     "TypeScript",
     "util"
   ],
-  "homepage": "https://github.com/RaymondClr",
-  "license": "MIT",
-  "type": "module",
-  "main": "soil.tsx",
-  "sideEffects": false,
   "author": "Raymond Yan <raymondclr@outlook.com>",
-  "contributors": [],
-  "scripts": {
-    "build": "rollup -c"
+  "homepage": "https://github.com/RaymondClr",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RaymondClr/Soil.git"
   },
-  "devDependencies": {
-    "types-for-adobe": "^7.0.12",
-    "@rollup/plugin-terser": "^0.4.0",
-    "@rollup/plugin-typescript": "^11.0.0",
-    "rollup": "^3.18.0",
-    "tslib": "^2.5.0"
+  "license": "MIT",
+  "main": "soil.tsx",
+  "type": "module",
+  "sideEffects": false,
+  "peerDependencies": {
+    "types-for-adobe": "*"
   }
 }

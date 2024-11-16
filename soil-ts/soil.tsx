@@ -1,3 +1,6 @@
+///<reference path="@types/soil.d.ts"/>
+///<reference path="@types/tree.d.ts"/>
+
 export { default as assign } from "./lodash/basic/assign";
 export { default as compose } from "./lodash/basic/compose";
 export { default as constant } from "./lodash/basic/constant";
@@ -296,6 +299,7 @@ export { default as eachLayers } from "./eachLayers";
 export { default as eachLayersRight } from "./eachLayersRight";
 export { default as eachOutputModules } from "./eachOutputModules";
 export { default as eachOutputModulesRight } from "./eachOutputModulesRight";
+export { default as eachProperties } from "./eachProperties";
 export { default as eachRenderQueueItems } from "./eachRenderQueueItems";
 export { default as eachRenderQueueItemsRight } from "./eachRenderQueueItemsRight";
 export { default as enableResizeImage } from "./enableResizeImage";

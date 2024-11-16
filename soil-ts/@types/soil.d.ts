@@ -101,7 +101,7 @@ declare type InTemporalEase = GetReturnType<Property["keyInTemporalEase"]>;
 declare type OutTemporalEase = GetReturnType<Property["keyOutTemporalEase"]>;
 declare type InSpatialTangent = GetReturnType<Property["keyInSpatialTangent"]>;
 declare type OutSpatialTangent = GetReturnType<Property["keyOutSpatialTangent"]>;
-declare type CanSetPropertyValueType = Property<ThreeDType | TwoDType | TwoDSpatialType | ThreeDSpatialType | OneDType | ColorType | MarkerValueType | ShapePropertyType | TextDocumentType>;
+declare type CanSetPropertyValueType = Property<ThreeDType | TwoDType | TwoDSpatialType | ThreeDSpatialType | OneDType | ColorType | MarkerValueType | ShapePropertyType | TextDocumentType | MaskIndexType | LayerIndexType>;
 declare type Predicate<T> = (...value: T[]) => boolean;
 declare type Iteratee<T, R> = (...value: T[]) => R;
 declare interface ThreeDSpatialType extends PropertyClassMembers {
@@ -113,19 +113,19 @@ declare type Keyframe = {
     property: Property;
     keyTime: number;
     keyValue: any | null;
-    keySelected: boolean;
-    keyInTemporalEase: InTemporalEase;
-    keyOutTemporalEase: OutTemporalEase;
-    keyTemporalContinuous: boolean;
-    keyTemporalAutoBezier: boolean;
-    keyInInterpolationType: KeyframeInterpolationType;
-    keyOutInterpolationType: KeyframeInterpolationType;
-    keyInSpatialTangent: InSpatialTangent | null;
-    keyOutSpatialTangent: OutSpatialTangent | null;
-    keySpatialAutoBezier: boolean | null;
-    keySpatialContinuous: boolean | null;
-    keyRoving: boolean | null;
-    keyLabel: number | null;
+    keySelected?: boolean | null;
+    keyInTemporalEase?: InTemporalEase | null;
+    keyOutTemporalEase?: OutTemporalEase | null;
+    keyTemporalContinuous?: boolean | null;
+    keyTemporalAutoBezier?: boolean | null;
+    keyInInterpolationType?: KeyframeInterpolationType | null;
+    keyOutInterpolationType?: KeyframeInterpolationType | null;
+    keyInSpatialTangent?: InSpatialTangent | null;
+    keyOutSpatialTangent?: OutSpatialTangent | null;
+    keySpatialAutoBezier?: boolean | null;
+    keySpatialContinuous?: boolean | null;
+    keyRoving?: boolean | null;
+    keyLabel?: number | null;
 };
 
 declare type JsonEscape = "\b" | "\t" | "\n" | "\f" | "\r" | "\v" | '"' | "\\";
@@ -135,7 +135,7 @@ declare type BuildIndexUnion<T extends number, K extends unknown[] = []> = K["le
 
 declare type NestedArray<T> = Array<T | NestedArray<T>>;
 
-type filterArr<T, U> = T extends readonly [infer R, ...infer H] ? (R extends U ? [R, ...filterArr<H, U>] : filterArr<H, U>) : [];
+declare type filterArr<T, U> = T extends readonly [infer R, ...infer H] ? (R extends U ? [R, ...filterArr<H, U>] : filterArr<H, U>) : [];
 
 declare class MouseEvent extends UIEvent {
     altKey: boolean;
@@ -188,3 +188,18 @@ declare type Many<T> = T | Array<T>;
 
 declare type ArrayIteratorTypeGuard<T, S extends T> = (value: T, index: number, collection: Array<T>) => value is S;
 declare type ObjectIteratorTypeGuard<T, S extends T[keyof T]> = (value: T[keyof T], key: string, collection: T) => value is S;
+
+declare interface CustomValueType extends PropertyClassMembers {
+    propertyValueType: PropertyValueType.CUSTOM_VALUE;
+    /*     value: never; */
+}
+
+declare interface MaskIndexType extends PropertyClassMembers {
+    propertyValueType: PropertyValueType.MASK_INDEX;
+    value: number;
+}
+
+declare interface LayerIndexType extends PropertyClassMembers {
+    propertyValueType: PropertyValueType.LAYER_INDEX;
+    value: number;
+}

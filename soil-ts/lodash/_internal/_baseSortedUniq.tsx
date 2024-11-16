@@ -14,7 +14,7 @@ function baseSortedUniq<T>(array: Array<T>, iteratee?: (value: T) => any): Array
     let resIndex = 0;
 
     const { length } = array;
-    const result = [];
+    const result: Array<T> = [];
 
     while (++index < length) {
         const value = array[index],
