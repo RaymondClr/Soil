@@ -4,6 +4,6 @@
 
 npm：https://www.npmjs.com/package/soil-ts
 
-文档：https://raymondclr.github.io/Soil
+文档：https://raymondclr.github.io/Soil/modules.html
 
 ![image](assets/sample.png)
