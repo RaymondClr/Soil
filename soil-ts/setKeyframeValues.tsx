@@ -6,6 +6,18 @@ import canSetKeyframeVelocity from "./canSetKeyframeVelocity";
 import isColorProperty from "./isColorProperty";
 import isProperty from "./isProperty";
 
+/**
+ * 设置关键帧值
+ *
+ * @param {Array<Keyframe>} keyframeValues
+ * @param {?Property} [targetProperty]
+ * @since 0.1.0
+ * @category Soil
+ * @see foo, bar, yoo
+ * @example 
+ * foo(param)
+ * // => result
+ */
 function setKeyframeValues(keyframeValues: Array<Keyframe>, targetProperty?: Property): void {
     if (keyframeValues.length === 0) {
         return;

@@ -18,6 +18,17 @@ import isWindow from "./isWindow";
 
 const root = this;
 const global = $.global;
+/**
+ * Tree UI 的集成版本
+ *
+ * @type {Tree}
+ * @since 0.1.0
+ * @category Soil
+ * @see https://github.com/RaymondClr/Tree
+ * @example
+ * foo(param)
+ * // => result
+ */
 const tree: Tree = { version: "beta 1.0.0", parse: runInContext, windows: [] };
 const layoutModeFlags = [0, 1, 2];
 const validContainerType = ["dialog", "palette", "window"];
@@ -87,7 +98,7 @@ function addControl(container: LooseContainer, value: object, key: string, colle
     assign(element, getElementStyle(value));
 }
 
-function addGeneralContainer(container: NativeContainer, value: object, flag: string, collector: ElementCollector):any {
+function addGeneralContainer(container: NativeContainer, value: object, flag: string, collector: ElementCollector): any {
     const style = getElementStyle(value);
     const newContainer = nativeAddContainer(container, flag, assignElementParam(value, flag));
 
@@ -415,7 +426,7 @@ function mapNullToUndefined(array: Array<unknown>): Array<unknown> {
 }
 
 function nativeAddContainer(container: NativeContainer, type: any, param: Array<any>): NativeContainer {
-    return (container.add as any)(type, param[1], param[2], param[3]) 
+    return (container.add as any)(type, param[1], param[2], param[3]);
 }
 
 function nativeAddControl(container: NativeContainer, type: any, param: Array<any>): NativeControl {

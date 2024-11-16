@@ -7,6 +7,18 @@ import splitPrefsSection from "./_internal/_splitPrefsSection";
 import trimPrefsBlankChar from "./_internal/_trimPrefsBlankChar";
 import readFile from "./readFile";
 
+/**
+ * 将首选项文件转换为对象键值对
+ *
+ * @param {LooseFile} path
+ * @returns {{ [x: string]: { [x: string]: string } }}
+ * @since 0.1.0
+ * @category Soil
+ * @see foo, bar, yoo
+ * @example 
+ * foo(param)
+ * // => result
+ */
 function parsePrefs(path: LooseFile): { [x: string]: { [x: string]: string } } {
     const splitSection = splitPrefsSection(readFile(path) as string);
     const groupedSection = partitionPrefsPairs(splitSection);

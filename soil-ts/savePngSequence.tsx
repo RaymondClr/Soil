@@ -7,6 +7,19 @@ import saveFrameToPng from "./saveFrameToPng";
 import secondToFrames from "./secondToFrames";
 import templateString from "./templateString";
 
+/**
+ * 将合成帧保存为 PNG 序列
+ *
+ * @param {CompItem} compItem
+ * @param {LooseFolder} outputPath
+ * @param {string} [prefix=compItem.name]
+ * @since 0.1.0
+ * @category Soil
+ * @see foo, bar, yoo
+ * @example 
+ * foo(param)
+ * // => result
+ */
 function savePngSequence(compItem: CompItem, outputPath: LooseFolder, prefix: string = compItem.name) {
     const folder = castFolder(outputPath);
     if (!folder.exists) {

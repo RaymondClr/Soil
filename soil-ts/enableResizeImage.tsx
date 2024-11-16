@@ -1,3 +1,13 @@
+/**
+ * ScriptUI 启用图像缩放
+ *
+ * @since 0.1.0
+ * @category Soil
+ * @see foo, bar, yoo
+ * @example 
+ * foo(param)
+ * // => result
+ */
 function enableResizeImage(): void {
     Image.prototype.onDraw = function () {
         if (!this.image) {

@@ -39,6 +39,19 @@ function hexEncode(string: string): string {
     return "\\u" + ("0000" + string.charCodeAt(0).toString(16)).slice(-4);
 }
 
+/**
+ * 字符串化，同 JSON.stringify。
+ *
+ * @param {*} value
+ * @param {(number | string)} [indent=4]
+ * @returns {string}
+ * @since 0.1.0
+ * @category Soil
+ * @see foo, bar, yoo
+ * @example 
+ * foo(param)
+ * // => result
+ */
 function stringify(value: any, indent: number | string = 4): string {
     return stringifyValue(value, isString(indent) ? indent : concatSpaceIndent(indent), "");
 }

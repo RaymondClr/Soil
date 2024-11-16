@@ -5,6 +5,19 @@ import getKeyframeValueByIndex from "./_internal/_getKeyframeValueByIndex";
 import isColorProperty from "./isColorProperty";
 import isCustomValueProperty from "./isCustomValueProperty";
 
+/**
+ * 获取关键帧的所有值
+ *
+ * @param {Property} property
+ * @param {?(property: Property, keyIndex: number) => boolean} [predicate]
+ * @returns {boolean) => Array<Keyframe>}
+ * @since 0.1.0
+ * @category Soil
+ * @see foo, bar, yoo
+ * @example 
+ * foo(param)
+ * // => result
+ */
 function getKeyframeValues(property: Property, predicate?: (property: Property, keyIndex: number) => boolean) {
     const func = isFunction(predicate) ? predicate : stubTrue;
     const isSpatialValue = property.isSpatial && !isColorProperty(property);

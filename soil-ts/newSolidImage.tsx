@@ -1,14 +1,19 @@
 import encodeImageString from "./encodeImageString";
+
 /**
  * 生成可以被 ScriptUI 控件读取的纯色图片编码明文
- * @param size 图片尺寸
- * @param color 图片颜色
- * @returns
- * @example 将图片批量写入到桌面 image 文件夹中
+ *
+ * @param {[number, number]} size 图片尺寸
+ * @param {[number, number, number]} color 图片颜色
+ * @returns {ScriptUIImage}
+ * @since 0.1.0
+ * @category Soil
+ * @see foo, bar, yoo
+ * @example 将 100 张纯色图片批量写入到桌面 image 文件夹中
  * ```ts
- * let pathDesktop = _.pathDesktop.fsName;
+ * const pathDesktop = _.pathDesktop.fsName;
  * _.times(100, index => {
- *     let image = _.newSolidImage([100, 100], [10 * index, 20 * index, 30 * index]) as unknown as string;
+ *     const image = _.newSolidImage([100, 100], [10 * index, 20 * index, 30 * index]) as unknown as string;
  *     _.writeFile(_.templateString("${0}/image/icon_${1}.png", pathDesktop, String(index)), image, "binary");
  * });
  * ```

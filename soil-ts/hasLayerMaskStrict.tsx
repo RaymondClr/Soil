@@ -1,6 +1,18 @@
 import baseGetLayerMaskProperty from "./_internal/_baseGetLayerMaskProperty";
 import isRasterLayer from "./isRasterLayer";
 
+/**
+ * 图层存在遮罩谓词，不同于 hasLayerMask，它同时判断 MaskMode。
+ *
+ * @param {Layer} layer
+ * @returns {layer is RasterLayer}
+ * @since 0.1.0
+ * @category Soil
+ * @see hasLayerMask
+ * @example
+ * foo(param)
+ * // => result
+ */
 function hasLayerMaskStrict(layer: Layer): layer is RasterLayer {
     if (!isRasterLayer(layer)) {
         return false;

@@ -1,3 +1,16 @@
+/**
+ * 通过谓词查找图层
+ *
+ * @param {CompItem} comp
+ * @param {CollectionIterator<Layer, CompItem, boolean>} iteratee
+ * @returns {*}
+ * @since 0.1.0
+ * @category Soil
+ * @see foo, bar, yoo
+ * @example 
+ * foo(param)
+ * // => result
+ */
 function findLayer(comp: CompItem, iteratee: CollectionIterator<Layer, CompItem, boolean>) {
     let index = 0;
     const length = comp.numLayers + 1;

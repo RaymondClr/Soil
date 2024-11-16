@@ -9,12 +9,12 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
-    "types-for-adobe": "*",
     "@rollup/plugin-terser": "*",
     "@rollup/plugin-typescript": "*",
     "rollup": "*",
-    "tslib": "*"
+    "tslib": "*",
+    "typedoc": "^0.26.11",
+    "types-for-adobe": "*"
   }
 }

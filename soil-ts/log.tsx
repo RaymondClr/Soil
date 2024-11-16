@@ -15,7 +15,20 @@ function formatArrayLog(array: Array<any>) {
     return templateString(">(${0})", String(array.length)) + title + "\n" + map(array, formatArrayItemLog).join("\n");
 }
 
-function log(object: any, rawMode?: boolean) {
+/**
+ * 将任意值写入到桌面 soil_log.txt 文件中
+ *
+ * @param {*} object
+ * @param {?boolean} [rawMode]
+ * @returns {string}
+ * @since 0.1.0
+ * @category Soil
+ * @see logJson
+ * @example
+ * foo(param)
+ * // => result
+ */
+function log(object: any, rawMode?: boolean): string {
     const content = !rawMode && isArray(object) ? formatArrayLog(object) : String(object);
     const logFile = createPath(pathDesktop.toString(), "soil_log.txt");
     writeFile(logFile, content + "\n", undefined, "a");

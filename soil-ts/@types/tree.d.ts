@@ -59,21 +59,21 @@ declare class TreeViewNode {
 }
 
 declare class _Window extends Window {
-    getElementById(targetId: string): _Control | null;
-    getElementsByName(name: string | Array<string>): Array<_Control> | null;
-    getElementsByType(type: string | Array<string>): _Control | null;
+    getElementById<T extends _Control>(targetId: string): T | null;
+    getElementsByName<T extends Array<_Control>>(name: string | Array<string>): T | null;
+    getElementsByType<T extends Array<_Control>>(type: string | Array<string>): T | null;
 }
 
 declare class _Panel extends Panel {
-    getElementById(targetId: string): _Control | null;
-    getElementsByName(name: string | Array<string>): Array<_Control> | null;
-    getElementsByType(type: string | Array<string>): _Control | null;
+    getElementById<T extends _Control>(targetId: string): T | null;
+    getElementsByName<T extends Array<_Control>>(name: string | Array<string>): T | null;
+    getElementsByType<T extends Array<_Control>>(type: string | Array<string>): T | null;
 }
 
 declare class _Group extends Group {
-    getElementById(targetId: string): _Control | null;
-    getElementsByName(name: string | Array<string>): Array<_Control> | null;
-    getElementsByType(type: string | Array<string>): _Control | null;
+    getElementById<T extends _Control>(targetId: string): T | null;
+    getElementsByName<T extends Array<_Control>>(name: string | Array<string>): T | null;
+    getElementsByType<T extends Array<_Control>>(type: string | Array<string>): T | null;
 }
 
 declare type Container = MainContainer | _Group;

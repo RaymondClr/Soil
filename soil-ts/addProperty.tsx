@@ -1,5 +1,18 @@
 import isAddableProperty from "./isAddableProperty";
 
+/**
+ * 添加 Property，不同于 addPropertyAlone，它忽略已存在属性。
+ *
+ * @param {_PropertyClasses} rootProperty
+ * @param {AdbePath} path
+ * @returns {(Property<UnknownPropertyType> | PropertyGroup | undefined)}
+ * @since 0.1.0
+ * @category Soil
+ * @see addPropertyAlone
+ * @example
+ * foo(param)
+ * // => result
+ */
 function addProperty(rootProperty: _PropertyClasses, path: AdbePath): Property<UnknownPropertyType> | PropertyGroup | undefined {
     let index = 0;
     const length = path.length;
