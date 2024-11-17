@@ -16,7 +16,7 @@ function formatArrayLog(array: Array<any>) {
 }
 
 /**
- * 将任意值写入到桌面 soil_log.txt 文件中
+ * 调试工具函数。将任意值换行写入到桌面 soil_log.txt 文件中
  *
  * @param {*} object
  * @param {?boolean} [rawMode]

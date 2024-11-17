@@ -1,7 +1,7 @@
 import isAddableProperty from "./isAddableProperty";
 
 /**
- * 单独添加 Property，不同于 addProperty，它无视已存在属性。
+ * 单独添加 Property，不同于 addProperty，它无视已存在 Property。
  *
  * @param {_PropertyClasses} rootProperty
  * @param {AdbePath} path
@@ -9,9 +9,22 @@ import isAddableProperty from "./isAddableProperty";
  * @since 0.1.0
  * @category Soil
  * @see addProperty
- * @example 
- * foo(param)
- * // => result
+ * @example
+ *
+ * ```ts
+ * const selectedLayer = _.getFirstSelectedLayer();
+ * 
+ * if (_.isRasterLayer(selectedLayer)) {
+ *     _.times(3, () => {
+ *         const newProperty = _.addPropertyAlone(selectedLayer, ["ADBE Effect Parade", "ADBE Checkbox Control"]);
+ *         // 如果路径无效或不存在，会返回 undefined。
+ *         if (newProperty) {
+ *             _.log(newProperty.name);
+ *         }
+ *     });
+ * }
+ * // 结果：选中图层上会被添加 3 个“复选框控制”效果。桌面日志分别记录 3 个效果名称。
+ * ```
  */
 function addPropertyAlone(rootProperty: _PropertyClasses, path: AdbePath): _PropertyClasses | undefined {
     let index = 0;

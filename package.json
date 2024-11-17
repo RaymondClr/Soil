@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.tsx",
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "watch": "node scripts/watch.js",
+    "insert-examples": "node scripts/insert-examples.js"
   },
   "keywords": [],
   "author": "",
@@ -16,5 +18,8 @@
     "tslib": "*",
     "typedoc": "^0.26.11",
     "types-for-adobe": "*"
+  },
+  "dependencies": {
+    "chokidar": "^4.0.1"
   }
 }
