@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Cascadia Mono";
-    src: url("../../theme/CascadiaCode.ttf") format("truetype"); /* 路径应相对于 HTML 文件 */
+    src: url("../../theme/CascadiaCode.ttf") format("truetype");
 }
 :root {
     /* Light */
@@ -478,7 +478,7 @@ a.tsd-anchor-link {
 
 code,
 pre {
-    font-family: "Cascadia Mono", "Microsoft YaHei UI", "Courier New", monospace;
+    font-family: "Cascadia Mono", "Consolas", "Microsoft YaHei UI", "Courier New", monospace;
     padding: 0.2em;
     margin: 0;
     font-size: 0.875rem;

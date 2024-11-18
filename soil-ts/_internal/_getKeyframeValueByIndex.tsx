@@ -2,7 +2,6 @@ import { IS_KEY_LABEL_EXISTS } from "./_global";
 
 function getKeyframeValueByIndex(property: Property, keyIndex: number, isSpatialValue: boolean, isCustomValue: boolean): Keyframe {
     return {
-        property: property,
         keyTime: property.keyTime(keyIndex),
         keyValue: isCustomValue ? null : property.keyValue(keyIndex),
         keySelected: property.keySelected(keyIndex),

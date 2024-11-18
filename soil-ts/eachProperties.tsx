@@ -12,7 +12,6 @@
  *
  * ```ts
  * const selectedLayer = _.getFirstSelectedLayer();
- * 
  * if (_.isLayer(selectedLayer)) {
  *     _.eachProperties(selectedLayer, function (property) {
  *         _.log(`${property.propertyIndex} | ${property.name} | ${property.matchName}`);

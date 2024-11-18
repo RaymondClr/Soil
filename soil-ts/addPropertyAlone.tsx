@@ -13,7 +13,6 @@ import isAddableProperty from "./isAddableProperty";
  *
  * ```ts
  * const selectedLayer = _.getFirstSelectedLayer();
- * 
  * if (_.isRasterLayer(selectedLayer)) {
  *     _.times(3, () => {
  *         const newProperty = _.addPropertyAlone(selectedLayer, ["ADBE Effect Parade", "ADBE Checkbox Control"]);

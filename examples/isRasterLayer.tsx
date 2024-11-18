@@ -1,7 +1,6 @@
 import * as _ from "../soil-ts";
 
 const selectedLayer = _.getFirstSelectedLayer();
-
 if (_.isRasterLayer(selectedLayer)) {
     _.addProperty(selectedLayer, ["ADBE Effect Parade", "ADBE Fill"]);
 }

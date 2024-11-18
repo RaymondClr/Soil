@@ -151,7 +151,7 @@ tsconfig.json
 
 script.jsx
 
-```jsx
+```js
 (function() {
     function createIsNativeType(nativeObject) {
         return function(value) {

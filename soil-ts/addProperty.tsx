@@ -13,7 +13,6 @@ import isAddableProperty from "./isAddableProperty";
  *
  * ```ts
  * const selectedLayer = _.getFirstSelectedLayer();
- * 
  * if (_.isRasterLayer(selectedLayer)) {
  *     _.addProperty(selectedLayer, ["ADBE Effect Parade", "ADBE Checkbox Control"]);
  * }
@@ -27,7 +26,6 @@ import isAddableProperty from "./isAddableProperty";
  * // 结果：选中图层上会被添加一个「颜色控制」效果。
  * 
  * const shapeLayer = _.getFirstSelectedLayer();
- * 
  * if (_.isShapeLayer(shapeLayer)) {
  *     _.addProperty(shapeLayer, ["ADBE Root Vectors Group", "ADBE Vector Shape - Ellipse"]);
  * }

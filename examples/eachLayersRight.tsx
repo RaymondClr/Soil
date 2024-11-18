@@ -1,7 +1,6 @@
 import * as _ from "../soil-ts/soil";
 
 const activeComp = _.getActiveComp();
-
 if (_.isCompItem(activeComp)) {
     _.eachLayersRight(activeComp, function (layer) {
         layer.remove();

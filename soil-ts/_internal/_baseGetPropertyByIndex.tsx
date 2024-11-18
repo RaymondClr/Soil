@@ -1,5 +1,5 @@
-function baseGetPropertyByIndex(value: EditableProperty, index: number): _PropertyClasses | null {
-    return 0 < index && index <= value.numProperties ? value.property(index) : null;
+function baseGetPropertyByIndex(value: EditableProperty, name: number): _PropertyClasses | null {
+    return 0 < name && name <= value.numProperties ? value.property(name) : null;
 }
 
 export default baseGetPropertyByIndex;

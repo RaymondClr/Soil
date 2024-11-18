@@ -3,7 +3,7 @@
         "noLib": true,
         "ignoreDeprecations": "5.0",
         "jsx": "preserve",
-        "types": ["types-for-adobe/AfterEffects/22.0"]
+        "types": ["types-for-adobe/AfterEffects/23.0"]
     },
     "include": ["examples/*.tsx", "src/index.tsx"]
 }

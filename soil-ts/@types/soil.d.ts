@@ -110,7 +110,6 @@ declare interface ThreeDSpatialType extends PropertyClassMembers {
 }
 
 declare type Keyframe = {
-    property: Property;
     keyTime: number;
     keyValue: any | null;
     keySelected?: boolean | null;

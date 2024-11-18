@@ -14,7 +14,6 @@ import collectionEachRight from "./_internal/_collectionEachRight";
  *
  * ```ts
  * const activeComp = _.getActiveComp();
- * 
  * if (_.isCompItem(activeComp)) {
  *     _.eachLayersRight(activeComp, function (layer) {
  *         layer.remove();

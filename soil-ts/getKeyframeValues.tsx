@@ -10,20 +10,33 @@ import isCustomValueProperty from "./isCustomValueProperty";
  *
  * @param {Property} property
  * @param {?(property: Property, keyIndex: number) => boolean} [predicate]
- * @returns {boolean) => Array<Keyframe>}
+ * @returns {Array<Keyframe>}
  * @since 0.1.0
  * @category Soil
  * @see foo, bar, yoo
- * @example 
- * foo(param)
- * // => result
+ * @example
+ *
+ * ```ts
+ * const activeComp = _.getActiveComp();
+ * if (_.isCompItem(activeComp)) {
+ *     const selectedProperty = activeComp.selectedProperties[0];
+ *     if (_.canSetPropertyValue(selectedProperty)) {
+ *         // 注意：keyLabel 方法在 Ae 22.6 中添加。
+ *         const redKeys = _.getKeyframeValues(selectedProperty, function (property, keyIndex) {
+ *             return property.keyLabel(keyIndex) === 1;
+ *         });
+ *         _.logJson(redKeys);
+ *     }
+ * }
+ * // 结果：桌面 json 日志会记录所有被过滤的红色关键帧的值。
+ * ```
  */
-function getKeyframeValues(property: Property, predicate?: (property: Property, keyIndex: number) => boolean) {
+function getKeyframeValues(property: Property, predicate?: (property: Property, keyIndex: number) => boolean): Array<Keyframe> {
     const func = isFunction(predicate) ? predicate : stubTrue;
     const isSpatialValue = property.isSpatial && !isColorProperty(property);
     const isCustomValue = isCustomValueProperty(property);
     const result: Array<Keyframe> = [];
-    times(property.numKeys, index => {
+    times(property.numKeys, (index) => {
         let keyIndex = index + 1;
         if (func(property, keyIndex)) {
             result.push(getKeyframeValueByIndex(property, keyIndex, isSpatialValue, isCustomValue));
