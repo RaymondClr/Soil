@@ -1,5 +1,6 @@
 {
-    "entryPoints": ["soil-ts/soil.tsx", "soil-ts/@types/soil.d.tsx", "soil-ts/@types/tree.d.tsx"]
+    "entryPoints": ["soil-ts/soil.tsx", "soil-ts/@types/soil.d.tsx", "soil-ts/@types/tree.d.tsx"],
+    "customCss": "theme/index.css"
 }
 
 // --basePath                         指定在显示文件路径时要使用的基本路径。

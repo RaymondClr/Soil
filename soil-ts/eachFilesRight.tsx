@@ -3,7 +3,7 @@ import getFiles from "./_internal/_getFiles";
 import isFile from "./isFile";
 
 /**
- * 反向迭代指定本地文件夹中的所有文件
+ * 反向迭代指定文件夹路径中的所有文件，不包括文件夹。
  *
  * @template {LooseFolder} T
  * @param {T} folder
@@ -11,10 +11,15 @@ import isFile from "./isFile";
  * @returns {(boolean | void) => void)}
  * @since 0.1.0
  * @category Soil
- * @see eachFiles
+ * @see eachFiles, mapFiles
  * @example
- * foo(param)
- * // => result
+ *
+ * ```ts
+ * _.eachFilesRight(_.pathDesktop.fsName, function (file, index) {
+ *     _.log(`${index + 1} ${file.fsName}`);
+ * });
+ * // 结果：桌面日志会记录所有桌面上的文件路径，不包括文件夹。
+ * ```
  */
 function eachFilesRight<T extends LooseFolder>(folder: T, iteratee: (file: File, index: number, files: Array<Folder | File>) => boolean | void): boolean | void {
     let resIndex = 0;

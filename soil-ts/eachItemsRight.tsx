@@ -9,10 +9,15 @@ import collectionEachRight from "./_internal/_collectionEachRight";
  * @returns {(boolean | void) => void)}
  * @since 0.1.0
  * @category Soil
- * @see foo, bar, yoo
+ * @see eachItems
  * @example
- * foo(param)
- * // => result
+ *
+ * ```ts
+ * _.eachItemsRight(app.project, function (item) {
+ *     item.remove();
+ * });
+ * // 结果：项目中的所有 Item 都会被删除。
+ * ```
  */
 function eachItemsRight<T extends Project | FolderItem | RenderQueue>(itemCollection: T, iteratee: (value: T["items"][number], index: number, itemCollection: T) => boolean | void): boolean | void {
     collectionEachRight(itemCollection.items, (value, index) => {

@@ -1,7 +1,7 @@
 import * as _ from "../soil-ts";
 
 const projectFile = app.project.file;
-// 未保存的工程文件返回 null
+// 注意：未保存的工程文件返回 null。
 if (_.isFile(projectFile)) {
     const newPath = _.createPath(_.pathDesktop.fsName, projectFile.displayName);
     _.copyFile(projectFile, newPath);

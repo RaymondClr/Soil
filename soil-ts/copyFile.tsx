@@ -3,8 +3,8 @@ import castFile from "./_internal/_castFile";
 /**
  * 复制本地文件
  *
- * @param {LooseFile} sourceFile
- * @param {LooseFile} newPath
+ * @param {LooseFile} sourceFile 原文件路径
+ * @param {LooseFile} newPath 新文件路径
  * @returns {boolean}
  * @since 0.1.0
  * @category Soil
@@ -12,7 +12,7 @@ import castFile from "./_internal/_castFile";
  *
  * ```ts
  * const projectFile = app.project.file;
- * // 未保存的工程文件返回 null
+ * // 注意：未保存的工程文件返回 null。
  * if (_.isFile(projectFile)) {
  *     const newPath = _.createPath(_.pathDesktop.fsName, projectFile.displayName);
  *     _.copyFile(projectFile, newPath);

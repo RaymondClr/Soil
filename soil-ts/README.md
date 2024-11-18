@@ -2,6 +2,9 @@
 
 一个基于 lodash 构建的 Ae 脚本开发工具库
 
+An After Effects scripting toolkit based on lodash
+
+Structure
 ```
 - dist
 - node_modules
@@ -54,9 +57,9 @@ tsconfig.json
 {
     "compilerOptions": {
         // The following are necessary compilation options
-		"jsx": "preserve",
-		"noLib": true,
-		"types": ["types-for-adobe/AfterEffects/23.0"]
+        "jsx": "preserve",
+        "noLib": true,
+        "types": ["types-for-adobe/AfterEffects/23.0"]
     }
 }
 ```

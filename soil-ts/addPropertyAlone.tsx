@@ -3,8 +3,8 @@ import isAddableProperty from "./isAddableProperty";
 /**
  * 单独添加 Property，不同于 addProperty，它无视已存在 Property。
  *
- * @param {_PropertyClasses} rootProperty
- * @param {AdbePath} path
+ * @param {_PropertyClasses} rootProperty 要添加 Property 的根 Property
+ * @param {AdbePath} path Property 路径
  * @returns {(_PropertyClasses | undefined)}
  * @since 0.1.0
  * @category Soil
@@ -23,7 +23,7 @@ import isAddableProperty from "./isAddableProperty";
  *         }
  *     });
  * }
- * // 结果：选中图层上会被添加 3 个“复选框控制”效果。桌面日志分别记录 3 个效果名称。
+ * // 结果：选中图层上会被添加 3 个「复选框控制」效果。桌面日志分别记录 3 个效果名称。
  * ```
  */
 function addPropertyAlone(rootProperty: _PropertyClasses, path: AdbePath): _PropertyClasses | undefined {

@@ -7,10 +7,19 @@
  * @returns {T}
  * @since 0.1.0
  * @category Soil
- * @see foo, bar, yoo
- * @example 
- * foo(param)
- * // => result
+ * @see eachPropertiesRight
+ * @example
+ *
+ * ```ts
+ * const selectedLayer = _.getFirstSelectedLayer();
+ * 
+ * if (_.isLayer(selectedLayer)) {
+ *     _.eachProperties(selectedLayer, function (property) {
+ *         _.log(`${property.propertyIndex} | ${property.name} | ${property.matchName}`);
+ *     });
+ * }
+ * // 结果：桌面日志会记录选中图层的的所有根 Property 的名称和其对应的匹配名。
+ * ```
  */
 function eachProperties<T extends PropertyGroup>(propertyGroup: T, iteratee: (property: _PropertyClasses, index: number, propertyGroup: T) => boolean | void): T {
     let index = 0;

@@ -8,12 +8,12 @@ import { nativeJoin } from "./lodash/basic/_global";
  * @since 0.1.0
  * @category Soil
  * @see foo, bar, yoo
- * @example 
+ * @example
  * foo(param)
  * // => result
  */
 function createPath(...args: Array<string>): string {
-    return nativeJoin.call(arguments, "/");
+    return nativeJoin.call(arguments, Folder.fs === "Windows" ? "\\" : "/");
 }
 
 export default createPath;

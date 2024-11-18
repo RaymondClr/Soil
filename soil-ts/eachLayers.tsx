@@ -9,10 +9,19 @@ import collectionEach from "./_internal/_collectionEach";
  * @returns {(boolean | void) => void)}
  * @since 0.1.0
  * @category Soil
- * @see foo, bar, yoo
- * @example 
- * foo(param)
- * // => result
+ * @see eachLayersRight
+ * @example
+ *
+ * ```ts
+ * const activeComp = _.getActiveComp();
+ * 
+ * if (_.isCompItem(activeComp)) {
+ *     _.eachLayers(activeComp, function (layer, index) {
+ *         _.log(`${index + 1} ${layer.name}`);
+ *     });
+ * }
+ * // 结果：桌面日志会记录活动合成中的所有图层名称。
+ * ```
  */
 function eachLayers<T extends CompItem>(compItem: T, iteratee: (layer: Layer, index: number, compItem: T) => boolean | void): (boolean | void) {
     collectionEach(compItem.layers, (value, index) => {
