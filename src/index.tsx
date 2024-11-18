@@ -5,3 +5,4 @@ let activeItem = _.getActiveComp();
 if (activeItem) {
     alert(activeItem.name);
 }
+_.find;

@@ -6,7 +6,7 @@ import collectionEach from "./_internal/_collectionEach";
  * @template {RenderQueueItem} T
  * @param {T} renderQueueItem
  * @param {(outputModule: T["outputModules"][number], index: number, renderQueueItem: T) => boolean | void} iteratee
- * @returns {(boolean | void) => void)}
+ * @returns {T}
  * @since 0.1.0
  * @category Soil
  * @see eachOutputModulesRight
@@ -21,12 +21,13 @@ import collectionEach from "./_internal/_collectionEach";
  * // 结果：桌面日志会记录项目中所有输出模块的名称。
  * ```
  */
-function eachOutputModules<T extends RenderQueueItem>(renderQueueItem: T, iteratee: (outputModule: T["outputModules"][number], index: number, renderQueueItem: T) => boolean | void): (boolean | void) {
+function eachOutputModules<T extends RenderQueueItem>(renderQueueItem: T, iteratee: (outputModule: T["outputModules"][number], index: number, renderQueueItem: T) => boolean | void): T {
     collectionEach(renderQueueItem.outputModules, (value, index) => {
         if (iteratee(value, index, renderQueueItem) === false) {
             return false;
         }
     });
+    return renderQueueItem;
 }
 
 export default eachOutputModules;

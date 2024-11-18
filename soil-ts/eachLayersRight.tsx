@@ -6,7 +6,7 @@ import collectionEachRight from "./_internal/_collectionEachRight";
  * @template {CompItem} T
  * @param {T} compItem
  * @param {(layer: Layer, index: number, compItem: T) => boolean | void} iteratee
- * @returns {(boolean | void) => void)}
+ * @returns {T}
  * @since 0.1.0
  * @category Soil
  * @see eachLayers
@@ -22,12 +22,13 @@ import collectionEachRight from "./_internal/_collectionEachRight";
  * // 结果：活动合成中的所有图层都会被删除。
  * ```
  */
-function eachLayersRight<T extends CompItem>(compItem: T, iteratee: (layer: Layer, index: number, compItem: T) => boolean | void): boolean | void {
+function eachLayersRight<T extends CompItem>(compItem: T, iteratee: (layer: Layer, index: number, compItem: T) => boolean | void): T {
     collectionEachRight(compItem.layers, (value, index) => {
         if (iteratee(value, index, compItem) === false) {
             return false;
         }
     });
+    return compItem;
 }
 
 export default eachLayersRight;

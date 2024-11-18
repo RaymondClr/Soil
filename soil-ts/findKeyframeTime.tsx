@@ -4,15 +4,15 @@
  * @template {Property} T
  * @param {T} property
  * @param {(property: T, keyIndex: number) => boolean} predicate
- * @returns {(number | null)}
+ * @returns {(number | undefined)}
  * @since 0.1.0
  * @category Soil
  * @see foo, bar, yoo
- * @example 
+ * @example
  * foo(param)
  * // => result
  */
-function findKeyframeTime<T extends Property>(property: T, predicate: (property: T, keyIndex: number) => boolean): number | null {
+function findKeyframeTime<T extends Property>(property: T, predicate: (property: T, keyIndex: number) => boolean): number | undefined {
     let keyIndex = 0;
     const length = property.numKeys + 1;
 
@@ -21,7 +21,6 @@ function findKeyframeTime<T extends Property>(property: T, predicate: (property:
             return property.keyTime(keyIndex);
         }
     }
-    return null;
 }
 
 export default findKeyframeTime;

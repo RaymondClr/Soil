@@ -6,7 +6,7 @@ import collectionEachRight from "./_internal/_collectionEachRight";
  * @template {RenderQueueItem} T
  * @param {T} renderQueueItem
  * @param {(outputModule: T["outputModules"][number], index: number, renderQueueItem: T) => boolean | void} iteratee
- * @returns {(boolean | void) => void)}
+ * @returns {T}
  * @since 0.1.0
  * @category Soil
  * @see eachOutputModules
@@ -24,12 +24,13 @@ import collectionEachRight from "./_internal/_collectionEachRight";
  * // 结果：项目中的所有输出模块都会被删除（不包含每个渲染项目的第一个输出模块）。
  * ```
  */
-function eachOutputModulesRight<T extends RenderQueueItem>(renderQueueItem: T, iteratee: (outputModule: T["outputModules"][number], index: number, renderQueueItem: T) => boolean | void): (boolean | void) {
+function eachOutputModulesRight<T extends RenderQueueItem>(renderQueueItem: T, iteratee: (outputModule: T["outputModules"][number], index: number, renderQueueItem: T) => boolean | void): T {
     collectionEachRight(renderQueueItem.outputModules, (value, index) => {
         if (iteratee(value, index, renderQueueItem) === false) {
             return false;
         }
     });
+    return renderQueueItem;
 }
 
 export default eachOutputModulesRight;

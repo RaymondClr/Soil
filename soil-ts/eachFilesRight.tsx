@@ -8,7 +8,7 @@ import isFile from "./isFile";
  * @template {LooseFolder} T
  * @param {T} folder
  * @param {(file: File, index: number, files: Array<Folder | File>) => boolean | void} iteratee
- * @returns {(boolean | void) => void)}
+ * @returns {T}
  * @since 0.1.0
  * @category Soil
  * @see eachFiles, mapFiles
@@ -21,7 +21,7 @@ import isFile from "./isFile";
  * // 结果：桌面日志会记录所有桌面上的文件路径，不包括文件夹。
  * ```
  */
-function eachFilesRight<T extends LooseFolder>(folder: T, iteratee: (file: File, index: number, files: Array<Folder | File>) => boolean | void): boolean | void {
+function eachFilesRight<T extends LooseFolder>(folder: T, iteratee: (file: File, index: number, files: Array<Folder | File>) => boolean | void): T {
     let resIndex = 0;
     forEachRight(getFiles(folder), (unknownFile, index, files) => {
         if (isFile(unknownFile)) {
@@ -30,6 +30,7 @@ function eachFilesRight<T extends LooseFolder>(folder: T, iteratee: (file: File,
             }
         }
     });
+    return folder;
 }
 
 export default eachFilesRight;

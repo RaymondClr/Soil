@@ -40,7 +40,7 @@ function updateExample(fileName) {
     const exampleCode = getExampleCode(exampleFilePath);
     const soilContent = fs.readFileSync(soilFilePath, "utf-8");
     const fileBaseName = path.basename(fileName, ".tsx");
-    const regex = new RegExp(`(^[^\\n\\r]+@example\\s*?[\\n\\r](?:^(?![function]).*?[\\n\\r])*?)function ${fileBaseName}`, "img");
+    const regex = new RegExp(`(^[^\\n\\r]+@example\\s*?[\\n\\r](?:^(?!function|let|const).*?[\\n\\r])*?)(function|let|const) ${fileBaseName}`, "img");
     const newExample = ` * @example\n *\n * \`\`\`ts\n${exampleCode}\n * \`\`\`\n */\n`;
     updatedContent = soilContent.replace(regex, function (match, $1) {
         return match.replace($1, newExample);

@@ -3,15 +3,15 @@
  *
  * @param {CompItem} comp
  * @param {CollectionIterator<Layer, CompItem, boolean>} iteratee
- * @returns {*}
+ * @returns {(Layer | undefined)}
  * @since 0.1.0
  * @category Soil
  * @see foo, bar, yoo
- * @example 
+ * @example
  * foo(param)
  * // => result
  */
-function findLayer(comp: CompItem, iteratee: CollectionIterator<Layer, CompItem, boolean>) {
+function findLayer(comp: CompItem, iteratee: CollectionIterator<Layer, CompItem, boolean>): Layer | undefined {
     let index = 0;
     const length = comp.numLayers + 1;
     const layers = comp.layers;
