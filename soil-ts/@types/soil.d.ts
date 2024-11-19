@@ -101,13 +101,15 @@ declare type InTemporalEase = GetReturnType<Property["keyInTemporalEase"]>;
 declare type OutTemporalEase = GetReturnType<Property["keyOutTemporalEase"]>;
 declare type InSpatialTangent = GetReturnType<Property["keyInSpatialTangent"]>;
 declare type OutSpatialTangent = GetReturnType<Property["keyOutSpatialTangent"]>;
-declare type CanSetPropertyValueType = Property<ThreeDType | TwoDType | TwoDSpatialType | ThreeDSpatialType | OneDType | ColorType | MarkerValueType | ShapePropertyType | TextDocumentType | MaskIndexType | LayerIndexType>;
+declare type CanSetValueProperty = Property<ThreeDType | TwoDType | TwoDSpatialType | ThreeDSpatialType | OneDType | ColorType | MarkerValueType | ShapePropertyType | TextDocumentType | MaskIndexType | LayerIndexType>;
 declare type Predicate<T> = (...value: T[]) => boolean;
 declare type Iteratee<T, R> = (...value: T[]) => R;
 declare interface ThreeDSpatialType extends PropertyClassMembers {
     propertyValueType: PropertyValueType.ThreeD_SPATIAL;
     value: ThreeDPoint;
 }
+
+declare type ShortcutsGroup = _TransformGroup | _LightOptionsGroup | _CameraOptionsGroup | _LayerStyles | _BlendOptionsGroup | _AdvBlendGroup | _DropShadow | _InnerShadow | _OuterGlow | _InnerGlow | _BevelAndEmboss | _Satin | _ColorOverlay | _GradientOverlay | _Stroke | _GeometryOptionsGroup | _MaterialOptionsGroup | _AudioGroup | _TextProperties | _TextPathOptions | _TextMoreOptions;
 
 declare type Keyframe = {
     keyTime: number;

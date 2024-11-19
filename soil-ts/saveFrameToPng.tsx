@@ -9,9 +9,17 @@ import castFile from "./_internal/_castFile";
  * @since 0.1.0
  * @category Soil
  * @see foo, bar, yoo
- * @example 
- * foo(param)
- * // => result
+ * @example
+ *
+ * ```ts
+ * const activeComp = _.getActiveComp();
+ * // 注意：如果没有活动合成会返回 undefined
+ * if (activeComp) {
+ *     const outputPath = _.createPath(_.pathDesktop.fsName, "frame.png");
+ *     _.saveFrameToPng(outputPath, activeComp, 0);
+ * }
+ * // 结果：活动合成的第一帧会以名称 frame.png 被导出至桌面
+ * ```
  */
 function saveFrameToPng(file: LooseFile, compItem: CompItem, time: number = compItem.time): void {
     compItem.saveFrameToPng(time, castFile(file));

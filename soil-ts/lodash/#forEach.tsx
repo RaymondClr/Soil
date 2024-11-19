@@ -10,7 +10,7 @@
  * @since 0.1.0
  * @alias each
  * @category Collection
- * @param {Array|Object} collection The collection to iterate over.
+ * @param {Array} array The collection to iterate over.
  * @param {Function} iteratee The function invoked per iteration.
  * @returns {Array|Object} Returns `collection`.
  * @see forEachRight, forIn, forInRight, forOwn, forOwnRight
@@ -22,7 +22,7 @@
  * forEach({ 'a': 1, 'b': 2 }, (value, key) => console.log(key))
  * // => Logs 'a' then 'b' (iteration order is not guaranteed).
  */
-function forEach<T>(array: Array<T>, iteratee: ArrayIterator<T, boolean | void>): Array<T> {
+function forEach<T>(array: Array<T>, iteratee: ArrayIterator<T, unknown>): Array<T> {
     let index = -1;
     const length = array.length;
 

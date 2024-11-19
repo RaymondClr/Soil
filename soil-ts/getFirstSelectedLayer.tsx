@@ -8,8 +8,14 @@ import createGetAppProperty from "./_internal/_createGetAppProperty";
  * @category Soil
  * @see foo, bar, yoo
  * @example
- * foo(param)
- * // => result
+ *
+ * ```ts
+ * const selectedLayer = _.getFirstSelectedLayer();
+ * if (_.isTextLayer(selectedLayer)) {
+ *     alert(selectedLayer.name);
+ * }
+ * // 结果：在选中文本图层的前提下，会弹窗显示图层名称。
+ * ```
  */
 let getFirstSelectedLayer: () => Layer | undefined = createGetAppProperty<Layer | undefined>(["project", "activeItem", "selectedLayers", "0"]);
 

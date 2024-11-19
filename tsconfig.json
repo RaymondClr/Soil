@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "strict": true,
         "noLib": true,
         "ignoreDeprecations": "5.0",
         "jsx": "preserve",

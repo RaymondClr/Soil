@@ -5,7 +5,7 @@ import collectionEach from "./_internal/_collectionEach";
  *
  * @template {Project | FolderItem | RenderQueue} T
  * @param {T} itemCollection
- * @param {(value: T["items"][number], index: number, itemCollection: T) => boolean | void} iteratee
+ * @param {(value: T["items"][number], index: number, itemCollection: T) => unknown} iteratee
  * @returns {T}
  * @since 0.1.0
  * @category Soil
@@ -29,7 +29,7 @@ import collectionEach from "./_internal/_collectionEach";
  * // 结果：桌面日志会记录项目中所有 renderQueueItem 对应的合成名称。
  * ```
  */
-function eachItems<T extends Project | FolderItem | RenderQueue>(itemCollection: T, iteratee: (value: T["items"][number], index: number, itemCollection: T) => boolean | void): T {
+function eachItems<T extends Project | FolderItem | RenderQueue>(itemCollection: T, iteratee: (value: T["items"][number], index: number, itemCollection: T) => unknown): T {
     collectionEach(itemCollection.items, (value, index) => {
         if (iteratee(value, index, itemCollection) === false) {
             return false;

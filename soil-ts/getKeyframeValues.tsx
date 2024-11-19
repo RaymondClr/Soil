@@ -8,8 +8,9 @@ import isCustomValueProperty from "./isCustomValueProperty";
 /**
  * 获取关键帧的所有值
  *
- * @param {Property} property
- * @param {?(property: Property, keyIndex: number) => boolean} [predicate]
+ * @template {CanSetValueProperty} T
+ * @param {T} property
+ * @param {?(property: T, keyIndex: number) => boolean} [predicate]
  * @returns {Array<Keyframe>}
  * @since 0.1.0
  * @category Soil
@@ -31,7 +32,7 @@ import isCustomValueProperty from "./isCustomValueProperty";
  * // 结果：桌面 json 日志会记录所有被过滤的红色关键帧的值。
  * ```
  */
-function getKeyframeValues(property: Property, predicate?: (property: Property, keyIndex: number) => boolean): Array<Keyframe> {
+function getKeyframeValues<T extends CanSetValueProperty>(property: T, predicate?: (property: T, keyIndex: number) => boolean): Array<Keyframe> {
     const func = isFunction(predicate) ? predicate : stubTrue;
     const isSpatialValue = property.isSpatial && !isColorProperty(property);
     const isCustomValue = isCustomValueProperty(property);

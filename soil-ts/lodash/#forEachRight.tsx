@@ -14,7 +14,7 @@
  * forEachRight([1, 2], value => console.log(value))
  * // => Logs `2` then `1`.
  */
-function forEachRight<T>(array: Array<T>, iteratee: ArrayIterator<T, boolean | void>): Array<T> {
+function forEachRight<T>(array: Array<T>, iteratee: ArrayIterator<T, unknown>): Array<T> {
     let length = array.length;
 
     while (length--) {

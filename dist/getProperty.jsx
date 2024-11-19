@@ -1,4 +1,4 @@
-// Raymond Yan (raymondclr@foxmail.com / qq: 1107677019) - 2024/11/18 18:57:01
+// Raymond Yan (raymondclr@foxmail.com / qq: 1107677019) - 2024/11/19 10:06:05
 // 哔哩哔哩：https://space.bilibili.com/634669（无名打字猿）
 // 爱发电：https://afdian.net/a/raymondclr
 
@@ -121,6 +121,7 @@
     function isAddableProperty(value) {
         return isPropertyGroup(value) || isMaskPropertyGroup(value) || isLayer(value);
     }
+    var isProperty = createIsNativeType(Property);
     var isFile = createIsNativeType(File);
     function newFile(path) {
         return new File(path);
@@ -154,7 +155,7 @@
             var name = path[index++];
             nested = isString(name) ? nested.property(name) : baseGetPropertyByIndex(nested, name);
         }
-        return index && index === length ? nested : undefined;
+        return index && index === length ? nested : null;
     }
     var isLightLayer = createIsNativeType(LightLayer);
     function templateString(string) {
@@ -195,7 +196,7 @@
     var selectedLayer = getFirstSelectedLayer();
     if (isLightLayer(selectedLayer)) {
         var property = getProperty(selectedLayer, [ "ADBE Light Options Group", "ADBE Light Color" ]);
-        if (isColorProperty(property)) {
+        if (isProperty(property) && isColorProperty(property)) {
             var color = property.value;
             log(color);
         }

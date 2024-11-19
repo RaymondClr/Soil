@@ -1,4 +1,4 @@
-// Raymond Yan (raymondclr@foxmail.com / qq: 1107677019) - 2024/11/18 16:57:10
+// Raymond Yan (raymondclr@foxmail.com / qq: 1107677019) - 2024/11/19 14:56:39
 // 哔哩哔哩：https://space.bilibili.com/634669（无名打字猿）
 // 爱发电：https://afdian.net/a/raymondclr
 
@@ -141,6 +141,18 @@
         };
     }
     var getFirstSelectedLayer = createGetAppProperty([ "project", "activeItem", "selectedLayers", "0" ]);
+    function baseGetLayerMaskProperty(layer) {
+        return layer.property("ADBE Mask Parade");
+    }
+    var isAVLayer = createIsNativeType(AVLayer);
+    var isShapeLayer = createIsNativeType(ShapeLayer);
+    var isTextLayer = createIsNativeType(TextLayer);
+    function isRasterLayer(layer) {
+        return isAVLayer(layer) || isShapeLayer(layer) || isTextLayer(layer);
+    }
+    function hasLayerMask(layer) {
+        return isRasterLayer(layer) && baseGetLayerMaskProperty(layer).numProperties > 0;
+    }
     function templateString(string) {
         var values = nativeSlice.call(arguments, 1);
         return string.replace(reTemplateString, function(matched, $1) {
@@ -180,6 +192,11 @@
     if (isLayer(selectedLayer)) {
         eachProperties(selectedLayer, function(property) {
             log("".concat(property.propertyIndex, " | ").concat(property.name, " | ").concat(property.matchName));
+        });
+    }
+    if (hasLayerMask(selectedLayer)) {
+        eachProperties(selectedLayer.mask, function(maskAtom) {
+            log(maskAtom.maskPath.value.vertices);
         });
     }
 }).call(this);

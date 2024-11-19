@@ -5,16 +5,21 @@ import collectionEach from "./_internal/_collectionEach";
  *
  * @template {RenderQueue} T
  * @param {T} renderQueue
- * @param {(renderQueueItem: T["items"][number], index: number, renderQueue: T) => boolean | void} iteratee
+ * @param {(renderQueueItem: T["items"][number], index: number, renderQueue: T) => unknown} iteratee
  * @returns {T}
  * @since 0.1.0
  * @category Soil
  * @see foo, bar, yoo
  * @example
- * foo(param)
- * // => result
+ *
+ * ```ts
+ * _.eachRenderQueueItems(app.project.renderQueue, function (renderQueueItem, index) {
+ *     _.log(`${index} ${renderQueueItem.status}`);
+ * });
+ * // 结果：桌面日志会记录项目中所有渲染队列 Item 的渲染状态。
+ * ```
  */
-function eachRenderQueueItems<T extends RenderQueue>(renderQueue: T, iteratee: (renderQueueItem: T["items"][number], index: number, renderQueue: T) => boolean | void): T {
+function eachRenderQueueItems<T extends RenderQueue>(renderQueue: T, iteratee: (renderQueueItem: T["items"][number], index: number, renderQueue: T) => unknown): T {
     collectionEach(renderQueue.items, (value, index) => {
         if (iteratee(value, index, renderQueue) === false) {
             return false;

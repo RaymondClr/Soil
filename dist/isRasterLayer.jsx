@@ -1,4 +1,4 @@
-// Raymond Yan (raymondclr@foxmail.com / qq: 1107677019) - 2024/11/18 16:57:10
+// Raymond Yan (raymondclr@foxmail.com / qq: 1107677019) - 2024/11/19 17:37:46
 // 哔哩哔哩：https://space.bilibili.com/634669（无名打字猿）
 // 爱发电：https://afdian.net/a/raymondclr
 
@@ -89,6 +89,38 @@
         var result = object == null ? undefined : baseGet(object, path);
         return result === undefined ? defaultValue : result;
     }
+    function map(array, iteratee) {
+        var index = -1;
+        var length = array == null ? 0 : array.length;
+        var result = new Array(length);
+        while (++index < length) {
+            result[index] = iteratee(array[index], index, array);
+        }
+        return result;
+    }
+    function filter(array, predicate) {
+        var index = -1;
+        var resIndex = 0;
+        var length = array == null ? 0 : array.length;
+        var result = [];
+        while (++index < length) {
+            var value = array[index];
+            if (predicate(value, index, array)) {
+                result[resIndex++] = value;
+            }
+        }
+        return result;
+    }
+    function forEach(array, iteratee) {
+        var index = -1;
+        var length = array.length;
+        while (++index < length) {
+            if (iteratee(array[index], index, array) === false) {
+                break;
+            }
+        }
+        return array;
+    }
     function createIsNativeType(nativeObject) {
         return function(value) {
             return value != null && value instanceof nativeObject;
@@ -118,12 +150,22 @@
         }
         return index && index === length ? nested : undefined;
     }
+    function eachPropertiesRight(propertyGroup, iteratee) {
+        var index = propertyGroup.numProperties + 1;
+        while (--index) {
+            if (iteratee(propertyGroup.property(index), index, propertyGroup) === false) {
+                break;
+            }
+        }
+        return propertyGroup;
+    }
     function createGetAppProperty(path) {
         return function() {
             return get(app, path);
         };
     }
     var getFirstSelectedLayer = createGetAppProperty([ "project", "activeItem", "selectedLayers", "0" ]);
+    var getSelectedLayers = createGetAppProperty([ "project", "activeItem", "selectedLayers" ]);
     var isAVLayer = createIsNativeType(AVLayer);
     var isShapeLayer = createIsNativeType(ShapeLayer);
     var isTextLayer = createIsNativeType(TextLayer);
@@ -133,5 +175,17 @@
     var selectedLayer = getFirstSelectedLayer();
     if (isRasterLayer(selectedLayer)) {
         addProperty(selectedLayer, [ "ADBE Effect Parade", "ADBE Fill" ]);
+    }
+    var selectedLayers = getSelectedLayers();
+    if (selectedLayers) {
+        var rasterLayers = filter(selectedLayers, isRasterLayer);
+        var maskGroups = map(rasterLayers, function(layer) {
+            return layer.mask;
+        });
+        forEach(maskGroups, function(maskGroup) {
+            eachPropertiesRight(maskGroup, function(property) {
+                return property.remove();
+            });
+        });
     }
 }).call(this);

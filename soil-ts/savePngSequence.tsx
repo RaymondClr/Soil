@@ -16,9 +16,17 @@ import templateString from "./templateString";
  * @since 0.1.0
  * @category Soil
  * @see foo, bar, yoo
- * @example 
- * foo(param)
- * // => result
+ * @example
+ *
+ * ```ts
+ * const activeComp = _.getActiveComp();
+ * // 注意：如果没有活动合成会返回 undefined
+ * if (activeComp) {
+ *     const outputPath = _.createPath(_.pathDesktop.fsName, "Sequence");
+ *     _.savePngSequence(activeComp, outputPath, "image");
+ * }
+ * // 结果：活动合成工作区范围内的所有帧会被渲染至桌面 Sequence 文件夹中，序列使用 image 作为前缀。
+ * ```
  */
 function savePngSequence(compItem: CompItem, outputPath: LooseFolder, prefix: string = compItem.name) {
     const folder = castFolder(outputPath);
