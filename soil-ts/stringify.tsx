@@ -25,7 +25,7 @@ function concatSpaceIndent(n: number): string {
 }
 
 function escapeJsonKey(string: string): string {
-    return string.replace(reEscapedJson, matched => {
+    return string.replace(reEscapedJson, (matched) => {
         const escaped = has(jsonEscapes, matched) ? jsonEscapes[matched as JsonEscape] : undefined;
         return isString(escaped) ? escaped : hexEncode(matched);
     });
@@ -47,10 +47,13 @@ function hexEncode(string: string): string {
  * @returns {string}
  * @since 0.1.0
  * @category Soil
- * @see foo, bar, yoo
- * @example 
- * foo(param)
- * // => result
+ * @see parseJson
+ * @example
+ *
+ * ```ts
+ * _.log(_.stringify(app.effects));
+ * // 结果：桌面日志记录当前 Ae 中的所有效果属性。
+ * ```
  */
 function stringify(value: any, indent: number | string = 4): string {
     return stringifyValue(value, isString(indent) ? indent : concatSpaceIndent(indent), "");

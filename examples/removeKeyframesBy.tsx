@@ -9,7 +9,7 @@ if (selectedProperties) {
     _.forEach(keysProperties, function (property, index) {
         if (_.hasKeyframes(property)) {
             const keyIndexes = keyIndexesGroup[index];
-            _.removeKeyframesBy(property, function (keyIndex) {
+            _.removeKeyframesBy(property, function (property, keyIndex) {
                 return _.contains(keyIndexes, keyIndex);
             });
         }

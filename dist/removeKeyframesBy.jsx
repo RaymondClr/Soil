@@ -1,4 +1,4 @@
-// Raymond Yan (raymondclr@foxmail.com / qq: 1107677019) - 2024/11/19 16:41:58
+// Raymond Yan (raymondclr@foxmail.com / qq: 1107677019) - 2024/11/20 16:40:24
 // 哔哩哔哩：https://space.bilibili.com/634669（无名打字猿）
 // 爱发电：https://afdian.net/a/raymondclr
 
@@ -142,6 +142,15 @@
     function canSetPropertyValue(property) {
         return isProperty(property) && !isNoValueProperty(property) && !isCustomValueProperty(property);
     }
+    function eachKeyframeIndexesRight(property, iteratee) {
+        var keyIndex = property.numKeys + 1;
+        while (--keyIndex) {
+            if (iteratee(property, keyIndex) === false) {
+                break;
+            }
+        }
+        return property;
+    }
     function createGetAppProperty(path) {
         return function() {
             return get(app, path);
@@ -151,18 +160,9 @@
     function hasKeyframes(property) {
         return isProperty(property) && canSetPropertyValue(property) && property.numKeys > 0;
     }
-    function eachKeyframeIndexes(property, iteratee) {
-        var keyIndex = property.numKeys + 1;
-        while (--keyIndex) {
-            if (iteratee(keyIndex, property) === false) {
-                break;
-            }
-        }
-        return property;
-    }
     function removeKeyframesBy(property, predicate) {
-        eachKeyframeIndexes(property, function(keyIndex, property) {
-            if (predicate(keyIndex, property)) {
+        eachKeyframeIndexesRight(property, function(property, keyIndex) {
+            if (predicate(property, keyIndex)) {
                 property.removeKey(keyIndex);
             }
         });
@@ -177,7 +177,7 @@
         forEach(keysProperties, function(property, index) {
             if (hasKeyframes(property)) {
                 var keyIndexes_1 = keyIndexesGroup_1[index];
-                removeKeyframesBy(property, function(keyIndex) {
+                removeKeyframesBy(property, function(property, keyIndex) {
                     return contains(keyIndexes_1, keyIndex);
                 });
             }

@@ -14,7 +14,7 @@ import isCustomValueProperty from "./isCustomValueProperty";
  * @returns {Array<Keyframe>}
  * @since 0.1.0
  * @category Soil
- * @see foo, bar, yoo
+ * @see setKeyframeValues
  * @example
  *
  * ```ts

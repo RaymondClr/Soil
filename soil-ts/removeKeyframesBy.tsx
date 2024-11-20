@@ -1,7 +1,7 @@
 import eachKeyframeIndexesRight from "./eachKeyframeIndexesRight";
 
 /**
- * 图层存在遮罩谓词，不同于 hasLayerMask，它同时判断 MaskMode。
+ * 移除 Property 上的关键帧，通过 predicate 判断哪些关键帧需要被移除。
  *
  * @template {CanSetValueProperty} T
  * @param {T} property
@@ -22,7 +22,7 @@ import eachKeyframeIndexesRight from "./eachKeyframeIndexesRight";
  *     _.forEach(keysProperties, function (property, index) {
  *         if (_.hasKeyframes(property)) {
  *             const keyIndexes = keyIndexesGroup[index];
- *             _.removeKeyframesBy(property, function (keyIndex) {
+ *             _.removeKeyframesBy(property, function (property, keyIndex) {
  *                 return _.contains(keyIndexes, keyIndex);
  *             });
  *         }
