@@ -11,10 +11,16 @@ import newFolder from "./_internal/_newFolder";
  * @returns {boolean}
  * @since 0.1.0
  * @category Soil
- * @see writeJson
+ * @see readFile, writeJson
  * @example
- * writeFile(param)
- * // => result
+ *
+ * ```ts
+ * const textPath = _.createPath(_.pathDesktop.fsName, "Soil.txt");
+ * _.writeFile(textPath, "Hello After Effects");
+ * const content = _.readFile(textPath);
+ * alert(content);
+ * // 结果：桌面被写入 Soil.txt 文件，弹窗内容显示 Hello After Effects。
+ * ```
  */
 function writeFile(path: LooseFile, content: string, encoding: string = "utf-8", mode: string = "w"): boolean {
     let file = castFile(path);

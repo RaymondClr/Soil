@@ -8,10 +8,16 @@ import castFolder from "./_internal/_castFolder";
  * @returns {boolean}
  * @since 0.1.0
  * @category Soil
- * @see foo, bar, yoo
- * @example 
- * foo(param)
- * // => result
+ * @see revealFolder
+ * @example
+ *
+ * ```ts
+ * const projectPath = app.project.file;
+ * if (projectPath) {
+ *     _.revealFile(projectPath);
+ * }
+ * // 结果：当前 Ae 工程文件被保存的前提下，资源管理器会打开工程文件所在文件夹。
+ * ```
  */
 function revealFile(value: LooseFile): boolean {
     const file = castFile(value);

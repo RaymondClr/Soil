@@ -5,10 +5,12 @@ import executeCommand from "./executeCommand";
  *
  * @since 0.1.0
  * @category Soil
- * @see foo, bar, yoo
- * @example 
- * foo(param)
- * // => result
+ * @example
+ *
+ * ```ts
+ * _.revealPreferences();
+ * // 结果：Ae 首选项面板会被打开。
+ * ```
  */
 function revealPreferences(): void {
     executeCommand(parseFloat(app.version) > 16.0 ? 3131 : 2359);

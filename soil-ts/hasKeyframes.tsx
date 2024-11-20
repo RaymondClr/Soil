@@ -8,7 +8,7 @@ import isProperty from "./isProperty";
  * @returns {property is CanSetValueProperty}
  * @since 0.1.0
  * @category Soil
- * @see foo, bar, yoo
+ * @see hasSelectedKeys
  * @example
  *
  * ```ts

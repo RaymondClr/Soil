@@ -1,4 +1,4 @@
-// Raymond Yan (raymondclr@foxmail.com / qq: 1107677019) - 2024/11/18 10:13:14
+// Raymond Yan (raymondclr@foxmail.com / qq: 1107677019) - 2024/11/20 23:32:19
 // 哔哩哔哩：https://space.bilibili.com/634669（无名打字猿）
 // 爱发电：https://afdian.net/a/raymondclr
 
@@ -28,7 +28,7 @@
         }
         return file.remove();
     }
-    var targetPath = createPath(pathDesktop.fsName, "note.txt");
+    var targetPath = createPath(pathDesktop.fsName, "Soil.txt");
     var targetFile = new File(targetPath);
     if (targetFile.exists) {
         deleteFile(targetFile);

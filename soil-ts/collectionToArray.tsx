@@ -8,6 +8,7 @@ import collectionEach from "./_internal/_collectionEach";
  * @returns {Array<T[number]>}
  * @since 0.1.0
  * @category Soil
+ * @see propertyGroupToArray
  * @example
  *
  * ```ts
@@ -15,7 +16,7 @@ import collectionEach from "./_internal/_collectionEach";
  * const itemsArr = _.collectionToArray(projectItems);
  * _.log(_.map(itemsArr, (item) => item.name));
  * // 结果：桌面日志会记录项目中所有的 Item 名称。
- * 
+ *
  * const activeComp = _.getActiveComp();
  * if (_.isCompItem(activeComp)) {
  *     const layers = _.collectionToArray(activeComp.layers);

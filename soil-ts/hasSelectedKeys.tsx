@@ -7,7 +7,7 @@ import hasKeyframes from "./hasKeyframes";
  * @returns {property is CanSetValueProperty}
  * @since 0.1.0
  * @category Soil
- * @see foo, bar, yoo
+ * @see hasKeyframes
  * @example
  *
  * ```ts

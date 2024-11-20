@@ -9,8 +9,12 @@ import { nativeJoin } from "./lodash/basic/_global";
  * @category Soil
  * @see foo, bar, yoo
  * @example
- * foo(param)
- * // => result
+ *
+ * ```ts
+ * const targetPath = _.createPath(_.pathDesktop.fsName, "Soil.txt");
+ * alert(targetPath);
+ * // 结果：弹窗内容显示完整文件路径。
+ * ```
  */
 function createPath(...args: Array<string>): string {
     return nativeJoin.call(arguments, Folder.fs === "Windows" ? "\\" : "/");

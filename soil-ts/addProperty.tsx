@@ -3,9 +3,10 @@ import isAddableProperty from "./isAddableProperty";
 /**
  * 添加 Property，不同于 addPropertyAlone，它忽略已存在 Property。
  *
- * @param {_PropertyClasses} rootProperty 要添加 Property 的根 Property
- * @param {AdbePath} path Property 路径
- * @returns {(Property<UnknownPropertyType> | PropertyGroup | undefined)}
+ * @template {Property | PropertyGroup} TResult
+ * @param {_PropertyClasses} rootProperty
+ * @param {AdbePath} path
+ * @returns {(TResult | undefined)}
  * @since 0.1.0
  * @category Soil
  * @see addPropertyAlone
@@ -17,14 +18,14 @@ import isAddableProperty from "./isAddableProperty";
  *     _.addProperty(selectedLayer, ["ADBE Effect Parade", "ADBE Checkbox Control"]);
  * }
  * // 结果：选中图层上会被添加一个「复选框控制」效果。
- * 
+ *
  * if (_.isRasterLayer(selectedLayer)) {
  *     // 注意：不推荐直接使用效果名称或 Property 索引作为路径，
  *     // 因为不同语言的 Ae 会有不同的效果名称，推荐使用匹配名。
  *     _.addProperty(selectedLayer, ["effect", "颜色控制"]);
  * }
  * // 结果：选中图层上会被添加一个「颜色控制」效果。
- * 
+ *
  * const shapeLayer = _.getFirstSelectedLayer();
  * if (_.isShapeLayer(shapeLayer)) {
  *     _.addProperty(shapeLayer, ["ADBE Root Vectors Group", "ADBE Vector Shape - Ellipse"]);
@@ -32,7 +33,7 @@ import isAddableProperty from "./isAddableProperty";
  * // 结果：形状图层「内容」Property Group 下会被添加一个「椭圆路径」Property。
  * ```
  */
-function addProperty(rootProperty: _PropertyClasses, path: AdbePath): Property<UnknownPropertyType> | PropertyGroup | undefined {
+function addProperty<TResult extends Property | PropertyGroup>(rootProperty: _PropertyClasses, path: AdbePath): TResult | undefined {
     let index = 0;
     const length = path.length;
     let nested = rootProperty;
@@ -46,7 +47,7 @@ function addProperty(rootProperty: _PropertyClasses, path: AdbePath): Property<U
             nested = nested.addProperty(name);
         }
     }
-    return index && index === length ? nested : undefined;
+    return index && index === length ? (nested as TResult) : undefined;
 }
 
 export default addProperty;

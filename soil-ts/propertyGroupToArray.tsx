@@ -8,6 +8,7 @@ import eachProperties from "./eachProperties";
  * @returns {_PropertyClasses[]}
  * @since 0.2.0
  * @category Soil
+ * @see collectionToArray
  * @example
  *
  * ```ts

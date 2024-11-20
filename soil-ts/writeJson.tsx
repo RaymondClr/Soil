@@ -10,10 +10,14 @@ import writeFile from "./writeFile";
  * @returns {boolean}
  * @since 0.1.0
  * @category Soil
- * @see writeFile
+ * @see parseJsonFile, writeFile
  * @example
- * writeJson(param)
- * // => result
+ *
+ * ```ts
+ * const textPath = _.createPath(_.pathDesktop.fsName, "Soil.json");
+ * _.writeJson(textPath, { version: 2025, name: "After Effects" });
+ * // 结果：桌面被写入一个 Soil.json 文件，文件存储对象被字符串化后的内容。
+ * ```
  */
 function writeJson(path: LooseFile, object: object, indent: string | number = 4): boolean {
     return writeFile(path, stringify(object, indent));

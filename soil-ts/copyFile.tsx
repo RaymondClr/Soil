@@ -8,6 +8,7 @@ import castFile from "./_internal/_castFile";
  * @returns {boolean}
  * @since 0.1.0
  * @category Soil
+ * @see deleteFile, moveFile
  * @example
  *
  * ```ts
