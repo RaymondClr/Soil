@@ -7,10 +7,15 @@ import every from "./lodash/#every";
  * @returns {boolean}
  * @since 0.1.0
  * @category Soil
- * @see foo, bar, yoo
- * @example 
- * foo(param)
- * // => result
+ * @example
+ *
+ * ```ts
+ * _.log(_.equalEvery([1, 1, 1]));
+ * // 结果：桌面日志记录 true
+ * 
+ * _.log(_.equalEvery([1, 2, 3]));
+ * // 结果：桌面日志记录 false
+ * ```
  */
 function equalEvery(array: Array<any>): boolean {
     if (array.length === 0) {

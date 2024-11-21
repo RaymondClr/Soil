@@ -1,4 +1,4 @@
-// Raymond Yan (raymondclr@foxmail.com / qq: 1107677019) - 2024/11/20 16:45:27
+// Raymond Yan (raymondclr@foxmail.com / qq: 1107677019) - 2024/11/21 10:39:56
 // 哔哩哔哩：https://space.bilibili.com/634669（无名打字猿）
 // 爱发电：https://afdian.net/a/raymondclr
 
@@ -113,16 +113,79 @@
         }
         return file.open(mode) && file.write(content) && file.close();
     }
+    function concatJson$1(head, partial, gap, mind, tail) {
+        return gap ? head + "\n" + gap + partial.join(",\n" + gap) + "\n" + mind + tail : head + partial.join(",") + tail;
+    }
+    function concatSpaceIndent$1(n) {
+        var indent = "", index = -1;
+        while (++index < n) {
+            indent += " ";
+        }
+        return indent;
+    }
+    function getPrimitiveValue$1(value) {
+        return isDate(value) ? value.toString() : value.valueOf();
+    }
+    function stringifyLog(value, indent) {
+        if (indent === void 0) {
+            indent = 4;
+        }
+        return stringifyValue$1(value, isString(indent) ? indent : concatSpaceIndent$1(indent), "");
+    }
+    function stringifyArray$1(array, indent, gap) {
+        var mind = gap;
+        gap += indent;
+        var partial = [];
+        forEach(array, function(value, index) {
+            partial[index] = stringifyValue$1(value, indent, gap);
+        });
+        return partial.length === 0 ? "[]" : concatJson$1("[", partial, gap, mind, "]");
+    }
+    function stringifyObject$1(object, indent, gap) {
+        var mind = gap;
+        gap += indent;
+        var colon = gap ? ": " : ":";
+        var partial = [];
+        forOwn(object, function(value, key) {
+            partial.push(key + colon + stringifyValue$1(value, indent, gap));
+        });
+        return partial.length === 0 ? "{}" : concatJson$1("{", partial, gap, mind, "}");
+    }
+    function stringifyValue$1(value, indent, gap) {
+        if (value == null) {
+            return "null";
+        }
+        var primitive = getPrimitiveValue$1(value);
+        switch (typeof primitive) {
+          case "string":
+            return "'" + primitive + "'";
+
+          case "number":
+            return String(primitive);
+
+          case "boolean":
+            return String(primitive);
+
+          case "object":
+            return isArray(primitive) ? stringifyArray$1(primitive, indent, gap) : stringifyObject$1(primitive, indent, gap);
+
+          case "function":
+            return '"' + primitive.toString() + '"';
+
+          default:
+            return String(primitive);
+        }
+    }
     function formatArrayItemLog(item, index) {
-        return templateString("${0}: ${1}", String(index), String(item));
+        return templateString("${0}: ${1}", String(index), stringifyLog(item));
     }
     function formatArrayLog(array) {
         var source = array.toSource();
         var title = source.length > 200 ? "[...]" : source;
         return templateString(">(${0})", String(array.length)) + title + "\n" + map(array, formatArrayItemLog).join("\n");
     }
-    function log(object, rawMode) {
-        var content = !rawMode && isArray(object) ? formatArrayLog(object) : String(object);
+    function log(value, rawMode) {
+        var content = !rawMode && isArray(value) ? formatArrayLog(value) : stringifyLog(value);
         var logFile = createPath(pathDesktop.toString(), "soil_log.txt");
         writeFile(logFile, content + "\n", undefined, "a");
         return content;

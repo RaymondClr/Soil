@@ -9,7 +9,7 @@ import eachKeyframeIndexesRight from "./eachKeyframeIndexesRight";
  * @returns {T}
  * @since 0.2.0
  * @category Soil
- * @see removeKeyframesBy
+ * @see {@linkcode removeKeyframes}
  * @example
  *
  * ```ts

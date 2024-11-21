@@ -10,7 +10,7 @@ import writeFile from "./writeFile";
  * @returns {boolean}
  * @since 0.1.0
  * @category Soil
- * @see parseJsonFile, writeFile
+ * @see {@linkcode parseJsonFile}, {@linkcode writeFile}
  * @example
  *
  * ```ts

@@ -9,7 +9,7 @@ import HexToDecimal from "./_internal/_HexToDecimal";
  * @returns {Array<number>}
  * @since 0.1.0
  * @category Soil
- * @see parsePrefs
+ * @see {@linkcode parsePrefs}
  * @example
  *
  * ```ts

@@ -8,7 +8,7 @@ import castFolder from "./_internal/_castFolder";
  * @returns {boolean}
  * @since 0.1.0
  * @category Soil
- * @see revealFolder
+ * @see {@linkcode revealFolder}
  * @example
  *
  * ```ts

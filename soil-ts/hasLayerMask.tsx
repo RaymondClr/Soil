@@ -8,7 +8,7 @@ import isRasterLayer from "./isRasterLayer";
  * @returns {layer is RasterLayer}
  * @since 0.1.0
  * @category Soil
- * @see hasLayerMaskStrict
+ * @see {@linkcode hasLayerMaskStrict}
  * @example
  *
  * ```ts

@@ -7,10 +7,14 @@ import importFile from "./importFile";
  * @returns {(_ItemClasses | null)}
  * @since 0.1.0
  * @category Soil
- * @see foo, bar, yoo
- * @example 
- * foo(param)
- * // => result
+ * @see {@linkcode importAsFootage}
+ * @example
+ *
+ * ```ts
+ * const aepPath = _.createPath(_.pathDesktop.fsName, "Soil.aep");
+ * _.importAsProject(aepPath);
+ * // 结果：桌面 aep 文件被导入为工程。
+ * ```
  */
 function importAsProject(file: LooseFile): _ItemClasses | null {
     return importFile(file, ImportAsType.PROJECT);

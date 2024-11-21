@@ -5,7 +5,7 @@ const selectedProperty = _.getFirstSelectedProperty();
 if (selectedProperty) {
     if (_.hasKeyframes(selectedProperty)) {
         _.eachKeyframesRight(selectedProperty, function (property, keyIndex, Keyframe) {
-            _.log(_.stringify(Keyframe));
+            _.log(Keyframe);
         });
     }
 }

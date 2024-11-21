@@ -47,12 +47,12 @@ function hexEncode(string: string): string {
  * @returns {string}
  * @since 0.1.0
  * @category Soil
- * @see parseJson
+ * @see {@linkcode parseJson}
  * @example
  *
  * ```ts
  * _.log(_.stringify(app.effects));
- * // 结果：桌面日志记录当前 Ae 中的所有效果属性。
+ * // 结果：桌面日志会以标准 Json 格式记录当前 Ae 中的所有效果属性。
  * ```
  */
 function stringify(value: any, indent: number | string = 4): string {

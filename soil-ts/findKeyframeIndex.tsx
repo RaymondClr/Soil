@@ -7,10 +7,19 @@
  * @returns {number}
  * @since 0.1.0
  * @category Soil
- * @see foo, bar, yoo
- * @example 
- * foo(param)
- * // => result
+ * @see {@linkcode findKeyframeTime}
+ * @example
+ *
+ * ```ts
+ * const selectedProperty = _.getFirstSelectedProperty();
+ * if (selectedProperty) {
+ *     if (_.hasKeyframes(selectedProperty)) {
+ *         const firstSelectedKeyIndex = _.findKeyframeIndex(selectedProperty, (property, keyIndex) => property.keySelected(keyIndex));
+ *         alert(firstSelectedKeyIndex);
+ *     }
+ * }
+ * // 结果：弹窗会显示选中 Property 中第一个被选中的关键帧的索引。
+ * ```
  */
 function findKeyframeIndex<T extends Property>(property: T, predicate: (property: T, keyIndex: number) => boolean): number {
     let keyIndex = 0;

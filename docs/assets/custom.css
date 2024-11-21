@@ -1,10 +1,6 @@
-@font-face {
-    font-family: "Cascadia Mono";
-    src: url("../../theme/CascadiaCode.ttf") format("truetype");
-}
 :root {
     /* Light */
-    --light-color-background: #f2f4f8;
+    --light-color-background: #f3f3f3;
     --light-color-background-secondary: #eff0f1;
     --light-color-warning-text: #222;
     --light-color-background-warning: #e6e600;
@@ -482,7 +478,7 @@ pre {
     padding: 0.2em;
     margin: 0;
     font-size: 0.875rem;
-    border-radius: 0.8em;
+    border-radius: 0em;
 }
 
 pre {
@@ -490,7 +486,7 @@ pre {
     white-space: pre-wrap;
     word-wrap: break-word;
     padding: 10px;
-    border: 1px solid var(--color-accent);
+    border: none;
 }
 pre code {
     padding: 0;
@@ -645,8 +641,8 @@ dl.tsd-comment-tag-group p {
 .tsd-filter-input input[type="checkbox"] {
     cursor: pointer;
     position: absolute;
-    width: 1.5em;
-    height: 1.5em;
+    width: 1em;
+    height: 1em;
     opacity: 0;
 }
 .tsd-filter-input input[type="checkbox"]:disabled {
@@ -654,8 +650,8 @@ dl.tsd-comment-tag-group p {
 }
 .tsd-filter-input svg {
     cursor: pointer;
-    width: 1.5em;
-    height: 1.5em;
+    width: 1em;
+    height: 1em;
     margin-right: 0.5em;
     border-radius: 0.33em;
     /* Leaving this at full opacity breaks event listeners on Firefox.
@@ -828,7 +824,7 @@ input[type="checkbox"]:checked ~ svg .tsd-checkbox-checkmark {
     display: none;
 }
 .tsd-nested-navigation {
-    margin-left: 3rem;
+    margin-left: 2rem;
 }
 .tsd-nested-navigation > li > details {
     margin-left: -1.5rem;
@@ -914,11 +910,12 @@ a.tsd-index-link {
     user-select: none;
 }
 .tsd-kind-icon {
-    margin-right: 0.5rem;
+    display: none;
+    /* margin-right: 0.5rem;
     width: 1.25rem;
     height: 1.25rem;
     min-width: 1.25rem;
-    min-height: 1.25rem;
+    min-height: 1.25rem; */
 }
 .tsd-signature > .tsd-kind-icon {
     margin-right: 0.8rem;
@@ -1275,6 +1272,10 @@ img {
 }
 .tsd-kind-function {
     color: var(--color-ts-function);
+}
+.tsd-kind-function code{
+    background: none;
+    text-decoration: underline;
 }
 .tsd-kind-class {
     color: var(--color-ts-class);

@@ -8,7 +8,7 @@
  * @returns {T}
  * @since 0.1.0
  * @category Soil
- * @see eachProperties
+ * @see {@linkcode eachProperties}
  * @example
  *
  * ```ts

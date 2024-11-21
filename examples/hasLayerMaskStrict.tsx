@@ -15,6 +15,6 @@ if (_.hasLayerMaskStrict(selectedLayer)) {
     const maxX = Math.max.apply(null, xPoints);
     const maxY = Math.max.apply(null, yPoints);
     const maskSourceRect = { top: minY, left: minX, width: maxX - minX, height: maxY - minY };
-    _.logJson(maskSourceRect);
+    _.log(maskSourceRect);
 }
-// 结果：选中图层存在 Mask 且 MaskMode 至少有一个不是 MaskMode.NONE 的前提下，桌面 Json 日志会记录所有 mask 组合后的 SoureRect。
+// 结果：选中图层存在 Mask 且 MaskMode 至少有一个不是 MaskMode.NONE 的前提下，桌面日志会记录所有 mask 组合后的 SoureRect。

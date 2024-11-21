@@ -7,7 +7,7 @@ import removeFileExt from "./removeFileExt";
  * @returns {string}
  * @since 0.1.0
  * @category Soil
- * @see removeFileExt
+ * @see {@linkcode removeFileExt}
  * @example
  *
  * ```ts

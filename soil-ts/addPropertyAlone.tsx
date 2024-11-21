@@ -9,7 +9,7 @@ import isAddableProperty from "./isAddableProperty";
  * @returns {(TResult | undefined)}
  * @since 0.1.0
  * @category Soil
- * @see addProperty
+ * @see {@linkcode addProperty}
  * @example
  *
  * ```ts

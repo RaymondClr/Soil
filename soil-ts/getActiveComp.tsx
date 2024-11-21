@@ -7,7 +7,7 @@ import isCompItem from "./isCompItem.jsx";
  * @returns {(CompItem | undefined)}
  * @since 0.1.0
  * @category Soil
- * @see getActiveItem
+ * @see {@linkcode getActiveItem}
  * @example
  *
  * ```ts

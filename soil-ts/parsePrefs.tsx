@@ -14,7 +14,7 @@ import readFile from "./readFile";
  * @returns {{ [x: string]: { [x: string]: string } }}
  * @since 0.1.0
  * @category Soil
- * @see decodePrefs
+ * @see {@linkcode decodePrefs}
  * @example
  *
  * ```ts

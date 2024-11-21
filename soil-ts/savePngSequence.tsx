@@ -15,7 +15,7 @@ import templateString from "./templateString";
  * @param {string} [prefix=compItem.name]
  * @since 0.1.0
  * @category Soil
- * @see saveFrameToPng
+ * @see {@linkcode saveFrameToPng}
  * @example
  *
  * ```ts

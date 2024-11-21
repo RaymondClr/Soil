@@ -13,7 +13,7 @@ import isProperty from "./isProperty";
  * @param {Array<Keyframe>} keyframeValues 一组关键帧
  * @since 0.1.0
  * @category Soil
- * @see getKeyframeValues
+ * @see {@linkcode getKeyframeValues}
  * @example
  *
  * ```ts
@@ -31,7 +31,7 @@ import isProperty from "./isProperty";
  *     }
  * }
  * // 结果：选中图层的位置 Property 会被添加 5 个关键帧，每个关键帧之间的间隔为 8 帧，关键帧水平和垂直位置每次移动 100 像素。
- * 
+ *
  * const selectedLayers = _.getSelectedLayers();
  * if (selectedLayers && selectedLayers.length === 2) {
  *     // 对选中图层按索引排序，确保图层的上下顺序不受选择顺序影响。
@@ -51,14 +51,14 @@ function setKeyframeValues(property: Property, keyframeValues: Array<Keyframe>):
     if (keyframeValues.length === 0) {
         return;
     }
-    forEach(keyframeValues, keyframe => {
+    forEach(keyframeValues, (keyframe) => {
         const keyTime = keyframe.keyTime;
         const keyValue = keyframe.keyValue;
         property.setValueAtTime(keyTime, keyValue);
     });
     const isSpatialValue = property.isSpatial && !isColorProperty(property);
     const canSetVelocity = canSetKeyframeVelocity(property);
-    forEach(keyframeValues, keyframe => {
+    forEach(keyframeValues, (keyframe) => {
         const keyIndex = property.nearestKeyIndex(keyframe.keyTime);
         const keyInSpatialTangent = keyframe.keyInSpatialTangent;
         const keyOutSpatialTangent = keyframe.keyOutSpatialTangent;

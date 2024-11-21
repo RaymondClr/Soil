@@ -10,10 +10,14 @@ import castFile from "./_internal/_castFile";
  * @returns {(T | null)}
  * @since 0.1.0
  * @category Soil
- * @see foo, bar, yoo
+ * @see {@linkcode importAsFootage}
  * @example
- * foo(param)
- * // => result
+ *
+ * ```ts
+ * const sequencePath = _.createPath(_.pathDesktop.fsName, "Sequence", "image_01.png");
+ * _.importFile(sequencePath, ImportAsType.FOOTAGE, true);
+ * // 结果：桌面 Sequence 文件夹中的 png 序列被导入为素材。
+ * ```
  */
 function importFile<T extends _ItemClasses>(path: LooseFile, importType: ImportAsType, sequence: boolean = false): T | null {
     const file = castFile(path);
@@ -23,7 +27,7 @@ function importFile<T extends _ItemClasses>(path: LooseFile, importType: ImportA
     }
     options.importAs = importType;
     options.sequence = sequence;
-    return app.project.importFile(options) as T | null;
+    return app.project.importFile(options) as T;
 }
 
 export default importFile;

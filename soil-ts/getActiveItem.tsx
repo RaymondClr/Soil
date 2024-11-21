@@ -4,7 +4,7 @@
  * @returns {(_ItemClasses | null)}
  * @since 0.1.0
  * @category Soil
- * @see getActiveComp
+ * @see {@linkcode getActiveComp}
  * @example
  *
  * ```ts

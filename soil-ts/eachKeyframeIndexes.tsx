@@ -7,7 +7,7 @@
  * @returns {T}
  * @since 0.2.0
  * @category Soil
- * @see eachKeyframeIndexesRight
+ * @see {@linkcode eachKeyframeIndexesRight}
  * @example
  *
  * ```ts

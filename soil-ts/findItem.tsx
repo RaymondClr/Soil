@@ -7,10 +7,16 @@
  * @returns {(_ItemClasses | undefined)}
  * @since 0.1.0
  * @category Soil
- * @see foo, bar, yoo
+ * @see {@linkcode findLayer}
  * @example
- * foo(param)
- * // => result
+ *
+ * ```ts
+ * const compItem = _.findItem(app.project, _.isCompItem);
+ * if (compItem) {
+ *     alert(compItem.name);
+ * }
+ * // 结果：如果项目中存在合成，那么弹窗会显示从上往下第一个合成的名称。
+ * ```
  */
 function findItem<T extends Project | FolderItem>(collection: T, iteratee: CollectionIterator<_ItemClasses, T, boolean>): _ItemClasses | undefined {
     let index = 0;

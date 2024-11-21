@@ -7,7 +7,7 @@ import castFile from "./_internal/_castFile";
  * @returns {boolean}
  * @since 0.1.0
  * @category Soil
- * @see copyFile, moveFile
+ * @see {@linkcode copyFile}, {@linkcode moveFile}
  * @example
  *
  * ```ts

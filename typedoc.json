@@ -4,9 +4,8 @@
     "categoryOrder": ["Soil", "*"],
     "navigation": {
         "includeCategories": true,
-
-        // "includeFolders": true
     },
+    "useTsLinkResolution":true,
 }
 
 // --basePath                         指定在显示文件路径时要使用的基本路径。

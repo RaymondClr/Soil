@@ -8,7 +8,7 @@ import castFile from "./_internal/_castFile";
  * @returns {(string | null)}
  * @since 0.1.0
  * @category Soil
- * @see writeFile, writeJson
+ * @see {@linkcode writeFile}, {@linkcode writeJson}
  * @example
  *
  * ```ts

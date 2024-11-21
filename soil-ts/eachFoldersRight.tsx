@@ -11,7 +11,7 @@ import isFolder from "./isFolder";
  * @returns {T}
  * @since 0.1.0
  * @category Soil
- * @see eachFolders
+ * @see {@linkcode eachFolders}
  * @example
  *
  * ```ts

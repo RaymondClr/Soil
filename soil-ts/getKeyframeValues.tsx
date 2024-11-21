@@ -14,7 +14,7 @@ import isCustomValueProperty from "./isCustomValueProperty";
  * @returns {Array<Keyframe>}
  * @since 0.1.0
  * @category Soil
- * @see setKeyframeValues
+ * @see {@linkcode setKeyframeValues}
  * @example
  *
  * ```ts
@@ -26,7 +26,7 @@ import isCustomValueProperty from "./isCustomValueProperty";
  *         const redKeys = _.getKeyframeValues(selectedProperty, function (property, keyIndex) {
  *             return property.keyLabel(keyIndex) === 1;
  *         });
- *         _.logJson(redKeys);
+ *         _.log(redKeys);
  *     }
  * }
  * // 结果：桌面 json 日志会记录所有被过滤的红色关键帧的值。

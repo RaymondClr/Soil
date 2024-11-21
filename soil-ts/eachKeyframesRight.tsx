@@ -10,7 +10,7 @@ import eachRight from "./lodash/#eachRight";
  * @returns {T}
  * @since 0.2.0
  * @category Soil
- * @see eachKeyframesRight
+ * @see {@linkcode eachKeyframesRight}
  * @example
  *
  * ```ts
@@ -19,7 +19,7 @@ import eachRight from "./lodash/#eachRight";
  * if (selectedProperty) {
  *     if (_.hasKeyframes(selectedProperty)) {
  *         _.eachKeyframesRight(selectedProperty, function (property, keyIndex, Keyframe) {
- *             _.log(_.stringify(Keyframe));
+ *             _.log(Keyframe);
  *         });
  *     }
  * }

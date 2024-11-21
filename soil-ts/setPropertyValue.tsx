@@ -11,7 +11,7 @@ import canSetPropertyValue from "./canSetPropertyValue";
  * @returns {(Property<T> | undefined)}
  * @since 0.1.0
  * @category Soil
- * @see setPropertyValueAlone, setPropertiesValues
+ * @see {@linkcode setPropertyValueAlone}, {@linkcode setPropertiesValues}
  * @example
  *
  * ```ts

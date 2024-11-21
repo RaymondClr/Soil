@@ -11,7 +11,7 @@ import newFolder from "./_internal/_newFolder";
  * @returns {boolean}
  * @since 0.1.0
  * @category Soil
- * @see readFile, writeJson
+ * @see {@linkcode readFile}, {@linkcode writeJson}
  * @example
  *
  * ```ts

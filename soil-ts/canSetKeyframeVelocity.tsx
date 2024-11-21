@@ -8,7 +8,7 @@ import isHoldInterpolationTypeOnly from "./_internal/_isHoldInterpolationTypeOnl
  * @since 0.1.0
  * @category Soil
  * @see foo, bar, yoo
- * @example 
+ * @example
  * foo(param)
  * // => result
  */

@@ -8,7 +8,7 @@ import canSetPropertyValue from "./canSetPropertyValue";
  * @param {object} values
  * @since 0.1.0
  * @category Soil
- * @see setPropertyValue
+ * @see {@linkcode setPropertyValue}
  * @example
  *
  * ```ts

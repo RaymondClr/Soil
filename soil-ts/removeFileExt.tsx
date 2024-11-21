@@ -5,7 +5,7 @@
  * @returns {string}
  * @since 0.1.0
  * @category Soil
- * @see getPlainFileName
+ * @see {@linkcode getPlainFileName}
  * @example
  *
  * ```ts

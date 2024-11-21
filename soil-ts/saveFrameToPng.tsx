@@ -8,7 +8,7 @@ import castFile from "./_internal/_castFile";
  * @param {number} [time=compItem.time]
  * @since 0.1.0
  * @category Soil
- * @see savePngSequence
+ * @see {@linkcode savePngSequence}
  * @example
  *
  * ```ts

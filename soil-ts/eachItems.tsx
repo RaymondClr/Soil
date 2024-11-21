@@ -9,7 +9,7 @@ import collectionEach from "./_internal/_collectionEach";
  * @returns {T}
  * @since 0.1.0
  * @category Soil
- * @see eachItemsRight
+ * @see {@linkcode eachItemsRight}
  * @example
  *
  * ```ts

@@ -8,7 +8,7 @@ import collectionEach from "./_internal/_collectionEach";
  * @returns {Array<T[number]>}
  * @since 0.1.0
  * @category Soil
- * @see propertyGroupToArray
+ * @see {@linkcode propertyGroupToArray}
  * @example
  *
  * ```ts

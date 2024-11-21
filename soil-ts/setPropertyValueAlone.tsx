@@ -12,7 +12,7 @@ import isProperty from "./isProperty";
  * @returns {(Property<T> | undefined)}
  * @since 0.1.0
  * @category Soil
- * @see setPropertyValue
+ * @see {@linkcode setPropertyValue}
  * @example
  *
  * ```ts

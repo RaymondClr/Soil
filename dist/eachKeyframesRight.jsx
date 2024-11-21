@@ -1,4 +1,4 @@
-// Raymond Yan (raymondclr@foxmail.com / qq: 1107677019) - 2024/11/20 16:11:35
+// Raymond Yan (raymondclr@foxmail.com / qq: 1107677019) - 2024/11/21 10:37:17
 // 哔哩哔哩：https://space.bilibili.com/634669（无名打字猿）
 // 爱发电：https://afdian.net/a/raymondclr
 
@@ -173,18 +173,6 @@
     var pathDesktop = Folder.desktop;
     var IS_KEY_LABEL_EXISTS = parseFloat(app.version) > 22.5;
     var reTemplateString = /\$\{(\d+)\}/g;
-    var jsonEscapes = {
-        "\b": "\\b",
-        "\t": "\\t",
-        "\n": "\\n",
-        "\f": "\\f",
-        "\r": "\\r",
-        "\v": "\\v",
-        '"': '\\"',
-        "\\": "\\\\"
-    };
-    var reEscapedJson = /[\\"\u0000-\u001f\u007f-\u009f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
-    var reHasEscapedJson = new RegExp(reEscapedJson.source);
     function isCustomValueProperty(property) {
         return property.propertyValueType === PropertyValueType.CUSTOM_VALUE;
     }
@@ -282,25 +270,8 @@
         }
         return file.open(mode) && file.write(content) && file.close();
     }
-    function formatArrayItemLog(item, index) {
-        return templateString("${0}: ${1}", String(index), String(item));
-    }
-    function formatArrayLog(array) {
-        var source = array.toSource();
-        var title = source.length > 200 ? "[...]" : source;
-        return templateString(">(${0})", String(array.length)) + title + "\n" + map(array, formatArrayItemLog).join("\n");
-    }
-    function log(object, rawMode) {
-        var content = !rawMode && isArray(object) ? formatArrayLog(object) : String(object);
-        var logFile = createPath(pathDesktop.toString(), "soil_log.txt");
-        writeFile(logFile, content + "\n", undefined, "a");
-        return content;
-    }
     function concatJson(head, partial, gap, mind, tail) {
         return gap ? head + "\n" + gap + partial.join(",\n" + gap) + "\n" + mind + tail : head + partial.join(",") + tail;
-    }
-    function concatJsonKey(string) {
-        return reHasEscapedJson.test(string) ? '"' + escapeJsonKey(string) + '"' : '"' + string + '"';
     }
     function concatSpaceIndent(n) {
         var indent = "", index = -1;
@@ -309,19 +280,10 @@
         }
         return indent;
     }
-    function escapeJsonKey(string) {
-        return string.replace(reEscapedJson, function(matched) {
-            var escaped = has(jsonEscapes, matched) ? jsonEscapes[matched] : undefined;
-            return isString(escaped) ? escaped : hexEncode(matched);
-        });
-    }
     function getPrimitiveValue(value) {
         return isDate(value) ? value.toString() : value.valueOf();
     }
-    function hexEncode(string) {
-        return "\\u" + ("0000" + string.charCodeAt(0).toString(16)).slice(-4);
-    }
-    function stringify(value, indent) {
+    function stringifyLog(value, indent) {
         if (indent === void 0) {
             indent = 4;
         }
@@ -342,7 +304,7 @@
         var colon = gap ? ": " : ":";
         var partial = [];
         forOwn(object, function(value, key) {
-            partial.push(concatJsonKey(key) + colon + stringifyValue(value, indent, gap));
+            partial.push(key + colon + stringifyValue(value, indent, gap));
         });
         return partial.length === 0 ? "{}" : concatJson("{", partial, gap, mind, "}");
     }
@@ -353,10 +315,10 @@
         var primitive = getPrimitiveValue(value);
         switch (typeof primitive) {
           case "string":
-            return concatJsonKey(primitive);
+            return "'" + primitive + "'";
 
           case "number":
-            return isFinite(primitive) ? String(primitive) : "null";
+            return String(primitive);
 
           case "boolean":
             return String(primitive);
@@ -365,17 +327,31 @@
             return isArray(primitive) ? stringifyArray(primitive, indent, gap) : stringifyObject(primitive, indent, gap);
 
           case "function":
-            return '"' + escapeJsonKey(primitive.toString()) + '"';
+            return '"' + primitive.toString() + '"';
 
           default:
-            return "null";
+            return String(primitive);
         }
+    }
+    function formatArrayItemLog(item, index) {
+        return templateString("${0}: ${1}", String(index), stringifyLog(item));
+    }
+    function formatArrayLog(array) {
+        var source = array.toSource();
+        var title = source.length > 200 ? "[...]" : source;
+        return templateString(">(${0})", String(array.length)) + title + "\n" + map(array, formatArrayItemLog).join("\n");
+    }
+    function log(value, rawMode) {
+        var content = !rawMode && isArray(value) ? formatArrayLog(value) : stringifyLog(value);
+        var logFile = createPath(pathDesktop.toString(), "soil_log.txt");
+        writeFile(logFile, content + "\n", undefined, "a");
+        return content;
     }
     var selectedProperty = getFirstSelectedProperty();
     if (selectedProperty) {
         if (hasKeyframes(selectedProperty)) {
             eachKeyframesRight(selectedProperty, function(property, keyIndex, Keyframe) {
-                log(stringify(Keyframe));
+                log(Keyframe);
             });
         }
     }

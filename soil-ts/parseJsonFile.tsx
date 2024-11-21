@@ -9,7 +9,7 @@ import readFile from "./readFile.jsx";
  * @returns {*}
  * @since 0.1.0
  * @category Soil
- * @see writeJson, parseJson
+ * @see {@linkcode writeJson}, {@linkcode parseJson}
  * @example
  *
  * ```ts

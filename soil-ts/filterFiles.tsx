@@ -8,10 +8,13 @@ import eachFiles from "./eachFiles";
  * @returns {Array<File>}
  * @since 0.1.0
  * @category Soil
- * @see foo, bar, yoo
- * @example 
- * foo(param)
- * // => result
+ * @see {@linkcode mapFiles}
+ * @example
+ *
+ * ```ts
+ * _.log(_.filterFiles(_.pathDesktop.fsName, (file) => file.displayName[0] === "G"));
+ * // 结果：桌面日志会记录所有桌面上以大写 G 开头的文件路径，不包括文件夹。
+ * ```
  */
 function filterFiles(folder: LooseFolder, predicate: (file: File, index: number, files: Array<Folder | File>) => boolean): Array<File> {
     const result: Array<File> = [];

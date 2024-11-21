@@ -8,10 +8,14 @@ import importFile from "./importFile";
  * @returns {(CompItem | null)}
  * @since 0.1.0
  * @category Soil
- * @see foo, bar, yoo
- * @example 
- * foo(param)
- * // => result
+ * @see {@linkcode importAsFootage}
+ * @example
+ *
+ * ```ts
+ * const psdPath = _.createPath(_.pathDesktop.fsName, "Soil.psd");
+ * _.importAsComp(psdPath, false);
+ * // 结果：桌面 psd 文件被导入为合成。
+ * ```
  */
 function importAsComp(file: LooseFile, sequence: boolean): CompItem | null {
     return importFile(file, ImportAsType.COMP, sequence);

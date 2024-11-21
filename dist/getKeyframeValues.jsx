@@ -1,4 +1,4 @@
-// Raymond Yan (raymondclr@foxmail.com / qq: 1107677019) - 2024/11/18 17:06:02
+// Raymond Yan (raymondclr@foxmail.com / qq: 1107677019) - 2024/11/21 10:30:30
 // 哔哩哔哩：https://space.bilibili.com/634669（无名打字猿）
 // 爱发电：https://afdian.net/a/raymondclr
 
@@ -7,6 +7,7 @@
     var objectProto = Object.prototype;
     var hasOwnProperty = objectProto.hasOwnProperty;
     var nativeJoin = arrayProto.join;
+    var nativeSlice = arrayProto.slice;
     var nativeToString = objectProto.toString;
     var MAX_ARRAY_LENGTH = 4294967295;
     var MAX_SAFE_INTEGER = 9007199254740991;
@@ -27,6 +28,15 @@
     }
     function stubTrue() {
         return true;
+    }
+    function map(array, iteratee) {
+        var index = -1;
+        var length = array == null ? 0 : array.length;
+        var result = new Array(length);
+        while (++index < length) {
+            result[index] = iteratee(array[index], index, array);
+        }
+        return result;
     }
     function forEach(array, iteratee) {
         var index = -1;
@@ -82,18 +92,7 @@
     }
     var pathDesktop = Folder.desktop;
     var IS_KEY_LABEL_EXISTS = parseFloat(app.version) > 22.5;
-    var jsonEscapes = {
-        "\b": "\\b",
-        "\t": "\\t",
-        "\n": "\\n",
-        "\f": "\\f",
-        "\r": "\\r",
-        "\v": "\\v",
-        '"': '\\"',
-        "\\": "\\\\"
-    };
-    var reEscapedJson = /[\\"\u0000-\u001f\u007f-\u009f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
-    var reHasEscapedJson = new RegExp(reEscapedJson.source);
+    var reTemplateString = /\$\{(\d+)\}/g;
     var isCompItem = createIsNativeType(CompItem);
     function isCustomValueProperty(property) {
         return property.propertyValueType === PropertyValueType.CUSTOM_VALUE;
@@ -117,13 +116,6 @@
     }
     function newFolder(path) {
         return new Folder(path);
-    }
-    function getActiveItem() {
-        return app.project.activeItem;
-    }
-    function getActiveComp() {
-        var item = getActiveItem();
-        return isCompItem(item) ? item : undefined;
     }
     function getKeyframeValueByIndex(property, keyIndex, isSpatialValue, isCustomValue) {
         return {
@@ -160,6 +152,19 @@
         });
         return result;
     }
+    function getActiveItem() {
+        return app.project.activeItem;
+    }
+    function getActiveComp() {
+        var item = getActiveItem();
+        return isCompItem(item) ? item : undefined;
+    }
+    function templateString(string) {
+        var values = nativeSlice.call(arguments, 1);
+        return string.replace(reTemplateString, function(matched, $1) {
+            return values[Number($1)];
+        });
+    }
     function writeFile(path, content, encoding, mode) {
         if (encoding === void 0) {
             encoding = "utf-8";
@@ -178,9 +183,6 @@
     function concatJson(head, partial, gap, mind, tail) {
         return gap ? head + "\n" + gap + partial.join(",\n" + gap) + "\n" + mind + tail : head + partial.join(",") + tail;
     }
-    function concatJsonKey(string) {
-        return reHasEscapedJson.test(string) ? '"' + escapeJsonKey(string) + '"' : '"' + string + '"';
-    }
     function concatSpaceIndent(n) {
         var indent = "", index = -1;
         while (++index < n) {
@@ -188,19 +190,10 @@
         }
         return indent;
     }
-    function escapeJsonKey(string) {
-        return string.replace(reEscapedJson, function(matched) {
-            var escaped = has(jsonEscapes, matched) ? jsonEscapes[matched] : undefined;
-            return isString(escaped) ? escaped : hexEncode(matched);
-        });
-    }
     function getPrimitiveValue(value) {
         return isDate(value) ? value.toString() : value.valueOf();
     }
-    function hexEncode(string) {
-        return "\\u" + ("0000" + string.charCodeAt(0).toString(16)).slice(-4);
-    }
-    function stringify(value, indent) {
+    function stringifyLog(value, indent) {
         if (indent === void 0) {
             indent = 4;
         }
@@ -221,7 +214,7 @@
         var colon = gap ? ": " : ":";
         var partial = [];
         forOwn(object, function(value, key) {
-            partial.push(concatJsonKey(key) + colon + stringifyValue(value, indent, gap));
+            partial.push(key + colon + stringifyValue(value, indent, gap));
         });
         return partial.length === 0 ? "{}" : concatJson("{", partial, gap, mind, "}");
     }
@@ -232,10 +225,10 @@
         var primitive = getPrimitiveValue(value);
         switch (typeof primitive) {
           case "string":
-            return concatJsonKey(primitive);
+            return "'" + primitive + "'";
 
           case "number":
-            return isFinite(primitive) ? String(primitive) : "null";
+            return String(primitive);
 
           case "boolean":
             return String(primitive);
@@ -244,20 +237,25 @@
             return isArray(primitive) ? stringifyArray(primitive, indent, gap) : stringifyObject(primitive, indent, gap);
 
           case "function":
-            return '"' + escapeJsonKey(primitive.toString()) + '"';
+            return '"' + primitive.toString() + '"';
 
           default:
-            return "null";
+            return String(primitive);
         }
     }
-    function writeJson(path, object, indent) {
-        if (indent === void 0) {
-            indent = 4;
-        }
-        return writeFile(path, stringify(object, indent));
+    function formatArrayItemLog(item, index) {
+        return templateString("${0}: ${1}", String(index), stringifyLog(item));
     }
-    function logJson(object) {
-        writeJson(createPath(pathDesktop.toString(), "soil_log.json"), object);
+    function formatArrayLog(array) {
+        var source = array.toSource();
+        var title = source.length > 200 ? "[...]" : source;
+        return templateString(">(${0})", String(array.length)) + title + "\n" + map(array, formatArrayItemLog).join("\n");
+    }
+    function log(value, rawMode) {
+        var content = !rawMode && isArray(value) ? formatArrayLog(value) : stringifyLog(value);
+        var logFile = createPath(pathDesktop.toString(), "soil_log.txt");
+        writeFile(logFile, content + "\n", undefined, "a");
+        return content;
     }
     var activeComp = getActiveComp();
     if (isCompItem(activeComp)) {
@@ -266,7 +264,7 @@
             var redKeys = getKeyframeValues(selectedProperty, function(property, keyIndex) {
                 return property.keyLabel(keyIndex) === 1;
             });
-            logJson(redKeys);
+            log(redKeys);
         }
     }
 }).call(this);

@@ -6,7 +6,7 @@ import createGetAppProperty from "./_internal/_createGetAppProperty";
  * @type {() => _PropertyClasses | undefined}
  * @since 0.1.0
  * @category Soil
- * @see getFirstSelectedLayer
+ * @see {@linkcode getFirstSelectedLayer}
  * @example
  *
  * ```ts

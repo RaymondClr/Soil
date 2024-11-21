@@ -11,7 +11,7 @@ import isFile from "./isFile";
  * @returns {T}
  * @since 0.1.0
  * @category Soil
- * @see eachFiles, mapFiles
+ * @see {@linkcode eachFiles}, {@linkcode mapFiles}
  * @example
  *
  * ```ts
