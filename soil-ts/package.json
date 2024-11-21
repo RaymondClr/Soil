@@ -1,6 +1,6 @@
 {
   "name": "soil-ts",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "一个基于 lodash 构建的 Ae 脚本开发工具库",
   "keywords": [
     "Adobe",

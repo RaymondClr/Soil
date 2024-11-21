@@ -5,7 +5,7 @@ const selectedProperty = _.getFirstSelectedProperty();
 if (selectedProperty) {
     if (_.hasSelectedKeys(selectedProperty)) {
         const selectedKeys = selectedProperty.selectedKeys;
-        _.removeKeyframesBy(selectedProperty, function (keyIndex) {
+        _.removeKeyframesBy(selectedProperty, function (property, keyIndex) {
             return _.contains(selectedKeys, keyIndex);
         });
     }

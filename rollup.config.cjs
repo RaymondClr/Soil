@@ -7,7 +7,7 @@ const minutes = 10;
 const inputDir = resolve(__dirname, "examples");
 const now = Date.now();
 const modifiedTimeLimit = now - minutes * 60 * 1000;
-const files = readdirSync(inputDir).filter(file => {
+const files = readdirSync(inputDir).filter((file) => {
     const filePath = resolve(inputDir, file);
     const stats = statSync(filePath);
     const isRecent = stats.mtimeMs >= modifiedTimeLimit;
@@ -19,7 +19,7 @@ if (files.length === 0) {
     process.exit(0);
 }
 
-const configs = files.map(file => {
+const configs = files.map((file) => {
     const inputPath = resolve(inputDir, file);
     const outputFileName = basename(file, ".tsx");
 

@@ -1,4 +1,4 @@
-// Raymond Yan (raymondclr@foxmail.com / qq: 1107677019) - 2024/11/19 16:59:58
+// Raymond Yan (raymondclr@foxmail.com / qq: 1107677019) - 2024/11/21 16:08:50
 // 哔哩哔哩：https://space.bilibili.com/634669（无名打字猿）
 // 爱发电：https://afdian.net/a/raymondclr
 
@@ -110,6 +110,15 @@
     function canSetPropertyValue(property) {
         return isProperty(property) && !isNoValueProperty(property) && !isCustomValueProperty(property);
     }
+    function eachKeyframeIndexesRight(property, iteratee) {
+        var keyIndex = property.numKeys + 1;
+        while (--keyIndex) {
+            if (iteratee(property, keyIndex) === false) {
+                break;
+            }
+        }
+        return property;
+    }
     function createGetAppProperty(path) {
         return function() {
             return get(app, path);
@@ -122,18 +131,9 @@
     function hasSelectedKeys(property) {
         return hasKeyframes(property) && property.selectedKeys.length > 0;
     }
-    function eachKeyframeIndexes(property, iteratee) {
-        var keyIndex = property.numKeys + 1;
-        while (--keyIndex) {
-            if (iteratee(keyIndex, property) === false) {
-                break;
-            }
-        }
-        return property;
-    }
     function removeKeyframesBy(property, predicate) {
-        eachKeyframeIndexes(property, function(keyIndex, property) {
-            if (predicate(keyIndex, property)) {
+        eachKeyframeIndexesRight(property, function(property, keyIndex) {
+            if (predicate(property, keyIndex)) {
                 property.removeKey(keyIndex);
             }
         });
@@ -143,7 +143,7 @@
     if (selectedProperty) {
         if (hasSelectedKeys(selectedProperty)) {
             var selectedKeys_1 = selectedProperty.selectedKeys;
-            removeKeyframesBy(selectedProperty, function(keyIndex) {
+            removeKeyframesBy(selectedProperty, function(property, keyIndex) {
                 return contains(selectedKeys_1, keyIndex);
             });
         }

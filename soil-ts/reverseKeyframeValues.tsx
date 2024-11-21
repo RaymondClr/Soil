@@ -26,7 +26,7 @@ import swapObjectValue from "./_internal/_swapObjectValue";
  *         }
  *     });
  * }
- * // 结果：选中的 Property 中，所有存在关键帧的 Porperty，关键帧都会被移除。
+ * // 结果：选中的 Property 中，所有存在关键帧的 Porperty，关键帧属性会被反转。
  * ```
  */
 function reverseKeyframeValues(keyframeValues: Array<Keyframe>, reverseKeyTime: boolean = true): Array<Keyframe> {
