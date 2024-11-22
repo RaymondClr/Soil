@@ -28,10 +28,6 @@ function getPrimitiveValue(value: any): any {
     return isDate(value) ? value.toString() : value.valueOf();
 }
 
-function hexEncode(string: string): string {
-    return "\\u" + ("0000" + string.charCodeAt(0).toString(16)).slice(-4);
-}
-
 function stringifyLog(value: any, indent: number | string = 4): string {
     return stringifyValue(value, isString(indent) ? indent : concatSpaceIndent(indent), "");
 }

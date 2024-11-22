@@ -59,6 +59,7 @@ declare class TreeViewNode {
 }
 
 declare class _Window extends Window {
+    onDraw: any
     getElementById<T extends _Control>(targetId: string): T | null;
     getElementsByName<T extends Array<_Control>>(name: string | Array<string>): T | null;
     getElementsByType<T extends Array<_Control>>(type: string | Array<string>): T | null;
@@ -81,7 +82,7 @@ declare type MainContainer = _Window | _Panel;
 declare type SelectableElementValue = { container: SelectableElement; itemIndex: number };
 
 declare type ElementCollector = {
-    nodeItems: Array<any>;
+    nodeItems: Array<TreeViewNode>;
     selectableElement: Array<SelectableElementValue>;
 };
 
@@ -100,8 +101,10 @@ declare type ListItemContainerFlags = "dropdownlist" | "listbox" | "treeview";
 declare type NativeContainerFlags = "group" | "panel" | "tab" | "tabbedpanel";
 declare type NativeControlFlags = "button" | "checkbox" | "dropdownlist" | "edittext" | "iconbutton" | "image" | "listbox" | "progressbar" | "radiobutton" | "scrollbar" | "slider" | "statictext" | "treeview";
 declare type SelectableElementFlags = "dropdownlist" | "listbox" | "tabbedpanel" | "treeview";
-declare type LooseContainer = Window | DropDownList | Group | ListBox | Panel | Tab | TabbedPanel | TreeView | TreeViewNode;
+declare type LooseContainer = DropDownList | Group | ListBox | Panel | Tab | TabbedPanel | TreeView | TreeViewNode;
 declare type ListItemContainer = DropDownList | ListBox | TreeView | TreeViewNode;
 declare type SelectableElement = DropDownList | ListBox | TabbedPanel | TreeView;
 declare type NativeContainer = Group | Panel | Tab | TabbedPanel;
 declare type NativeControl = Button | Checkbox | DropDownList | EditText | IconButton | Image | ListBox | Progressbar | RadioButton | Scrollbar | Slider | StaticText | TreeView;
+declare type CreationPropertiesLocation = 2 | 3 | 4 | 5;
+declare type MainContainerTypeName = "dialog" | "palette" | "window";

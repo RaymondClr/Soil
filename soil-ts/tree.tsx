@@ -26,15 +26,74 @@ const global = $.global;
  * @category Soil
  * @see https://github.com/RaymondClr/Tree
  * @example
- * foo(param)
- * // => result
+ *
+ * ```ts
+ * function foo() {
+ *     alert("Yoooooo!!!");
+ * }
+ * 
+ * _.tree.parse({
+ *     style: { margins: 5, alignChildren: ["fill", "fill"] },
+ *     param: ["palette", "", undefined, { resizeable: true }],
+ *     group1: {
+ *         style: { margins: 0, spacing: 0, orientation: "column", alignChildren: ["fill", "fill"] },
+ *         param: ["mainGroup1", undefined, undefined],
+ *         edittext1: {
+ *             style: { preferredSize: [180, 230] },
+ *             param: ["console", undefined, "console", { multiline: true, scrolling: true }],
+ *         },
+ *     },
+ *     group2: {
+ *         style: { orientation: "column", alignChildren: ["fill", "fill"], alignment: ["fill", "bottom"] },
+ *         param: ["paramGroup1", undefined, undefined],
+ *         group1: {
+ *             style: { orientation: "row", alignment: ["fill", "bottom"] },
+ *             param: ["dropdownlistGroup"],
+ *             statictext1: [undefined, [0, 0, 30, 25], "方向"],
+ *             dropdownlist1: {
+ *                 style: { alignment: ["fill", ""], selection: 3 }, //定义下拉列表的默认选项
+ *                 param: ["direction", [0, 0, 170, 25], ["+x", "-x", "+y", "-y"]],
+ *             },
+ *         },
+ *         group2: {
+ *             style: { spacing: 5, orientation: "row", alignChildren: ["fill", "fill"], alignment: ["fill", "bottom"] },
+ *             param: ["settingGroup"],
+ *             group1: {
+ *                 style: { orientation: "column", alignment: ["left", "bottom"] },
+ *                 param: ["mainGroup"],
+ *                 statictext1: ["time", [0, 0, 30, 25], "时间"],
+ *                 statictext2: ["transition", [0, 0, 30, 25], "过渡"],
+ *                 statictext3: ["distance", [0, 0, 30, 25], "距离"],
+ *             },
+ *             group2: {
+ *                 style: { orientation: "column", alignChildren: ["fill", "fill"] },
+ *                 param: ["mainGroup"],
+ *                 slider1: ["time", [0, 0, 140, 25], 1, 0, 3],
+ *                 slider2: ["transition", [0, 0, 140, 25], 1, 0, 3],
+ *                 slider3: ["distance", [0, 0, 140, 25], 1, 0, 3],
+ *             },
+ *             group3: {
+ *                 style: { orientation: "column", alignment: ["right", "bottom"] },
+ *                 param: ["mainGroup"],
+ *                 edittext1: ["time", [0, 0, 45, 25], "10"],
+ *                 edittext2: ["transition", [0, 0, 45, 25], "10"],
+ *                 edittext3: ["distance", [0, 0, 45, 25], "10"],
+ *             },
+ *         },
+ *     },
+ *     button1: {
+ *         style: { onClick: foo }, //添加事件侦听
+ *         param: ["button", undefined, "添加"],
+ *     },
+ * });
+ * ```
  */
 const tree: Tree = { version: "beta 1.0.0", parse: runInContext, windows: [] };
 const layoutModeFlags = [0, 1, 2];
-const validContainerType = ["dialog", "palette", "window"];
+const validMainContainerTypeName: MainContainerTypeName[] = ["dialog", "palette", "window"];
 const mainContainerDefault: ContainerDefault = { dockable: true, show: true, singleton: false };
 
-const controlParamRef = {
+const controlParamRef: _Record<string, CreationPropertiesLocation> = {
     button: 3,
     checkbox: 3,
     dropdownlist: 3,
@@ -49,7 +108,7 @@ const controlParamRef = {
     statictext: 3,
     treeview: 3,
 };
-const containerParamRef = { group: 2, panel: 3, tab: 3, tabbedpanel: 3 };
+const containerParamRef: _Record<string, CreationPropertiesLocation> = { group: 2, panel: 3, tab: 3, tabbedpanel: 3 };
 
 const elementTypeFlags = {
     button: "A",
@@ -118,7 +177,7 @@ function addGeneralControl(container: NativeContainer, value: object, flag: stri
 }
 
 function addGetElementMethods(constructors: [typeof Window, typeof Panel, typeof Group]): void {
-    forEach(constructors, constructor => {
+    forEach(constructors, (constructor) => {
         const prototype = constructor.prototype as AnyObject;
         prototype.getElementById = getElementById;
         prototype.getElementsByName = getElementsByName;
@@ -169,27 +228,30 @@ function assignLayoutMode(setAll: number, setAlone: number): number {
     return 0;
 }
 
-function assignUniqueName(param: Array<unknown>, flag: string): Array<unknown> {
+function assignUniqueName(param: Array<any>, flag: string): Array<unknown> {
     const name = param[0];
     if (isNil(name)) {
         return param;
     }
-    const index = getCreationPropertiesIndex(flag);
-    const creationProperties = param[index];
-    if (!isObject(creationProperties)) {
-        param[index] = {};
-    }
-    if (has(creationProperties, "name")) {
+    const location = getCreationPropertiesLocation(flag);
+    const creationProperties = param[location];
+
+    if (isObject(creationProperties)) {
+        if (has(creationProperties, "name")) {
+            return param;
+        } else {
+            param[location].name = name;
+            return param;
+        }
+    } else {
+        param[location] = { name: name };
         return param;
     }
-    (param[index] as AnyObject).name = name;
-
-    return param;
 }
 
 function assignWindowType(param: Array<unknown>): Array<unknown> {
     const type = String(param[0]);
-    param[0] = contains(validContainerType, type) ? type : ["palette"];
+    param[0] = contains(validMainContainerTypeName, type) ? type : "palette";
     return param;
 }
 
@@ -272,9 +334,9 @@ function createIsElementFlag<T extends string>(regex: RegExp) {
 }
 
 function baseEachElement(containers: Array<Container>, accumulator: Array<_Control>, breaker: (accumulator: Array<_Control>) => boolean, predicate: (element: _Control) => boolean): boolean {
-    return some(containers, container => {
+    return some(containers, (container) => {
         const result: Array<Container> = [];
-        const isDone = some(container.children, element => {
+        const isDone = some(container.children, (element) => {
             if (isNativeContainer(element.type)) {
                 result.push(element as Container);
             }
@@ -288,7 +350,7 @@ function baseEachElement(containers: Array<Container>, accumulator: Array<_Contr
 }
 
 function expandTreeViewNodes(nodes: Array<TreeViewNode>): void {
-    forEach(nodes, node => {
+    forEach(nodes, (node) => {
         node.expanded = true;
     });
 }
@@ -301,14 +363,14 @@ function freezeProperty<T extends object>(object: T, property: string) {
     object.watch(property, (name: string, oldValue: T) => oldValue);
 }
 
-function getCreationPropertiesIndex(key: string): number {
+function getCreationPropertiesLocation(key: string) {
     if (isNativeControl(key)) {
         return controlParamRef[key];
-    }
-    if (isNativeContainer(key)) {
+    } else if (isNativeContainer(key)) {
         return containerParamRef[key];
+    } else {
+        return 0;
     }
-    return 0;
 }
 
 function getElementById(this: Container, targetId: unknown): _Control | null {
@@ -317,7 +379,7 @@ function getElementById(this: Container, targetId: unknown): _Control | null {
 
     const breaker = (accumulator: Array<_Control>): boolean => accumulator.length > 0;
 
-    baseEachElement([this], result, breaker, element => {
+    baseEachElement([this], result, breaker, (element) => {
         const elementId = baseGetElementId(element);
         if (isNil(elementId)) {
             return false;
@@ -343,7 +405,7 @@ function getElementsByName(this: Container, ...args: Array<unknown>): Array<_Con
 
     const breaker = (): boolean => targetNames.length === seen.length;
 
-    baseEachElement([this], result, breaker, element => {
+    baseEachElement([this], result, breaker, (element) => {
         const elementId = baseGetElementId(element);
         if (isNil(elementId)) {
             return false;
@@ -362,7 +424,7 @@ function getElementsByType(this: Container, ...args: Array<unknown>): Array<_Con
     const targetTypes = filterFindElementInput(arguments);
     const result: Array<_Control> = [];
 
-    baseEachElement([this], result, stubFalse, element => contains(targetTypes, element.type));
+    baseEachElement([this], result, stubFalse, (element) => contains(targetTypes, element.type));
 
     return result.length === 0 ? null : result;
 }
@@ -422,7 +484,7 @@ function isValidElement(flag: string): flag is ElementFlags {
 }
 
 function mapNullToUndefined(array: Array<unknown>): Array<unknown> {
-    return map(array, value => (isNull(value) ? undefined : value));
+    return map(array, (value) => (isNull(value) ? undefined : value));
 }
 
 function nativeAddContainer(container: NativeContainer, type: any, param: Array<any>): NativeContainer {
@@ -464,14 +526,14 @@ function runInContext(resource: AnyObject): MainContainer {
 }
 
 function selectChildItem(selectableElementValues: Array<SelectableElementValue>) {
-    forEach(selectableElementValues, value => {
+    forEach(selectableElementValues, (value) => {
         const container = value.container;
         const itemIndex = value.itemIndex;
 
         if (isTabbedpanel(container)) {
             container.selection = itemIndex;
         } else {
-            container.selection = map(castArray(itemIndex), value => container.items[value]) as unknown as ListItem;
+            container.selection = map(castArray(itemIndex), (value) => container.items[value]) as unknown as ListItem;
         }
     });
 }

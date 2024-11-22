@@ -1,7 +1,7 @@
 import has from "../#has";
 
-function mapValues<T, U>(object: Record<string, T>, iteratee: (value: T, key: string, object: Record<string, T>) => U): Record<string, U> {
-    const result: Record<string, U> = {};
+function mapValues<T, U>(object: _Record<string, T>, iteratee: (value: T, key: string, object: _Record<string, T>) => U): _Record<string, U> {
+    const result: _Record<string, U> = {};
 
     for (const key in object) {
         if (has(object, key)) {

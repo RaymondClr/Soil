@@ -5,9 +5,11 @@ import { hasOwnProperty } from "./basic/_global";
  *
  * @since 0.1.0
  * @category Object
- * @param {Object} object The object to query.
- * @param {string} key The key to check.
- * @returns {boolean} Returns `true` if `key` exists, else `false`.
+ * @template {{}} T
+ * @template {PropertyKey} U
+ * @param {T} object
+ * @param {U} key
+ * @returns {(object is T & _Record<U, unknown>)}
  * @see hasIn, hasPath, hasPathIn
  * @example
  *
@@ -20,7 +22,7 @@ import { hasOwnProperty } from "./basic/_global";
  * has(other, 'a')
  * // => false
  */
-function has(object: any, key: PropertyName): boolean {
+function has<T extends {}, U extends PropertyKey>(object: T, key: U): object is T & _Record<U, unknown> {
     return object != null && hasOwnProperty.call(object, key);
 }
 
