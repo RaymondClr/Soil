@@ -1,17 +1,19 @@
+import isPropertyGroup from "./isPropertyGroup";
+
 /**
  * 索引组 Property 类型谓词
  *
- * @param {Property} property
- * @returns {property is Property}
+ * @param {*} property
+ * @returns {property is PropertyGroup}
  * @since 0.1.0
  * @category Soil
  * @see foo, bar, yoo
- * @example 
+ * @example
  * foo(param)
  * // => result
  */
-function isIndexedGroupType(property: Property): property is Property {
-    return property.propertyType == PropertyType.INDEXED_GROUP;
+function isIndexedGroupType(property: any): property is PropertyGroup {
+    return isPropertyGroup(property) && property.propertyType == PropertyType.INDEXED_GROUP;
 }
 
 export default isIndexedGroupType;

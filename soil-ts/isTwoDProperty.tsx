@@ -1,17 +1,19 @@
+import isProperty from "./isProperty";
+
 /**
  * 二维 Property 谓词
  *
- * @param {Property} property
+ * @param {*} property
  * @returns {property is TwoDProperty}
  * @since 0.1.0
  * @category Soil
  * @see foo, bar, yoo
- * @example 
+ * @example
  * foo(param)
  * // => result
  */
-function isTwoDProperty(property: Property): property is TwoDProperty {
-    return property.propertyValueType === PropertyValueType.TwoD;
+function isTwoDProperty(property: any): property is TwoDProperty {
+    return isProperty(property) && property.propertyValueType === PropertyValueType.TwoD;
 }
 
 export default isTwoDProperty;

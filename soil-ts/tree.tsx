@@ -31,7 +31,7 @@ const global = $.global;
  * function foo() {
  *     alert("Yoooooo!!!");
  * }
- * 
+ *
  * _.tree.parse({
  *     style: { margins: 5, alignChildren: ["fill", "fill"] },
  *     param: ["palette", "", undefined, { resizeable: true }],
@@ -177,7 +177,7 @@ function addGeneralControl(container: NativeContainer, value: object, flag: stri
 }
 
 function addGetElementMethods(constructors: [typeof Window, typeof Panel, typeof Group]): void {
-    forEach(constructors, (constructor) => {
+    forEach(constructors, constructor => {
         const prototype = constructor.prototype as AnyObject;
         prototype.getElementById = getElementById;
         prototype.getElementsByName = getElementsByName;
@@ -334,9 +334,9 @@ function createIsElementFlag<T extends string>(regex: RegExp) {
 }
 
 function baseEachElement(containers: Array<Container>, accumulator: Array<_Control>, breaker: (accumulator: Array<_Control>) => boolean, predicate: (element: _Control) => boolean): boolean {
-    return some(containers, (container) => {
+    return some(containers, container => {
         const result: Array<Container> = [];
-        const isDone = some(container.children, (element) => {
+        const isDone = some(container.children, element => {
             if (isNativeContainer(element.type)) {
                 result.push(element as Container);
             }
@@ -350,7 +350,7 @@ function baseEachElement(containers: Array<Container>, accumulator: Array<_Contr
 }
 
 function expandTreeViewNodes(nodes: Array<TreeViewNode>): void {
-    forEach(nodes, (node) => {
+    forEach(nodes, node => {
         node.expanded = true;
     });
 }
@@ -379,7 +379,7 @@ function getElementById(this: Container, targetId: unknown): _Control | null {
 
     const breaker = (accumulator: Array<_Control>): boolean => accumulator.length > 0;
 
-    baseEachElement([this], result, breaker, (element) => {
+    baseEachElement([this], result, breaker, element => {
         const elementId = baseGetElementId(element);
         if (isNil(elementId)) {
             return false;
@@ -405,7 +405,7 @@ function getElementsByName(this: Container, ...args: Array<unknown>): Array<_Con
 
     const breaker = (): boolean => targetNames.length === seen.length;
 
-    baseEachElement([this], result, breaker, (element) => {
+    baseEachElement([this], result, breaker, element => {
         const elementId = baseGetElementId(element);
         if (isNil(elementId)) {
             return false;
@@ -424,7 +424,7 @@ function getElementsByType(this: Container, ...args: Array<unknown>): Array<_Con
     const targetTypes = filterFindElementInput(arguments);
     const result: Array<_Control> = [];
 
-    baseEachElement([this], result, stubFalse, (element) => contains(targetTypes, element.type));
+    baseEachElement([this], result, stubFalse, element => contains(targetTypes, element.type));
 
     return result.length === 0 ? null : result;
 }
@@ -484,7 +484,7 @@ function isValidElement(flag: string): flag is ElementFlags {
 }
 
 function mapNullToUndefined(array: Array<unknown>): Array<unknown> {
-    return map(array, (value) => (isNull(value) ? undefined : value));
+    return map(array, value => (isNull(value) ? undefined : value));
 }
 
 function nativeAddContainer(container: NativeContainer, type: any, param: Array<any>): NativeContainer {
@@ -496,7 +496,7 @@ function nativeAddControl(container: NativeContainer, type: any, param: Array<an
 }
 
 function nativeAddNode(container: TreeViewNode, text: string): TreeViewNode {
-    return container.add("node", text) as TreeViewNode;
+    return container.add("node", text);
 }
 
 function nativeAddNodeItem(node: ListItemContainer, text: string): ListItem {
@@ -526,14 +526,13 @@ function runInContext(resource: AnyObject): MainContainer {
 }
 
 function selectChildItem(selectableElementValues: Array<SelectableElementValue>) {
-    forEach(selectableElementValues, (value) => {
+    forEach(selectableElementValues, value => {
         const container = value.container;
         const itemIndex = value.itemIndex;
-
         if (isTabbedpanel(container)) {
             container.selection = itemIndex;
         } else {
-            container.selection = map(castArray(itemIndex), (value) => container.items[value]) as unknown as ListItem;
+            container.selection = map(castArray(itemIndex), value => container.items[value]) as unknown as ListItem;
         }
     });
 }

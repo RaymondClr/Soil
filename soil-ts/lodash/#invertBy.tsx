@@ -22,7 +22,7 @@ import keys from "./#keys";
  * // => { 'group1': ['a', 'c'], 'group2': ['b'] }
  */
 function invertBy<T extends object, S extends string>(object: T, iteratee: (value: T[keyof T]) => S): Dictionary<Array<S>> {
-    const result: any = {};
+    const result: Dictionary<Array<any>> = {};
     forEach(keys(object), key => {
         const value = iteratee(object[key]);
         if (has(result, value)) {

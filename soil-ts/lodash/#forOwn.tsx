@@ -25,7 +25,7 @@ import has from "./#has";
  * })
  * // => Logs 'a' then 'b' (iteration order is not guaranteed).
  */
-function forOwn<T>(object: T, iteratee: ObjectIterator<T, boolean | void>): T {
+function forOwn<T extends {}>(object: T, iteratee: ObjectIterator<T, boolean | void>): T {
     for (const key in object) {
         if (has(object, key)) {
             if (iteratee(object[key], key, object) === false) {

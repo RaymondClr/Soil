@@ -3,14 +3,14 @@ import createIsAVLayer from "./_internal/_createIsAVLayer";
 /**
  * 参考图层谓词
  *
- * @type {*}
+ * @type {(value: any) => value is AVLayer}
  * @since 0.1.0
  * @category Soil
  * @see foo, bar, yoo
- * @example 
+ * @example
  * foo(param)
  * // => result
  */
-const isGuideLayer = createIsAVLayer(layer => layer.guideLayer);
+const isGuideLayer: (value: any) => value is AVLayer = createIsAVLayer(layer => layer.guideLayer);
 
 export default isGuideLayer;

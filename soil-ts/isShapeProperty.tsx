@@ -1,17 +1,19 @@
+import isProperty from "./isProperty";
+
 /**
  * 形状 Property 谓词
  *
- * @param {Property} property
+ * @param {*} property
  * @returns {property is ShapeProperty}
  * @since 0.1.0
  * @category Soil
  * @see foo, bar, yoo
- * @example 
+ * @example
  * foo(param)
  * // => result
  */
-function isShapeProperty(property: Property): property is ShapeProperty {
-    return property.propertyValueType === PropertyValueType.SHAPE;
+function isShapeProperty(property: any): property is ShapeProperty {
+    return isProperty(property) && property.propertyValueType === PropertyValueType.SHAPE;
 }
 
 export default isShapeProperty;

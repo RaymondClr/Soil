@@ -1,17 +1,19 @@
+import isProperty from "./isProperty";
+
 /**
  * 标记 Property 类型谓词
  *
- * @param {Property} property
+ * @param {*} property
  * @returns {property is MarkerValueProperty}
  * @since 0.1.0
  * @category Soil
  * @see foo, bar, yoo
- * @example 
+ * @example
  * foo(param)
  * // => result
  */
-function isMarkerProperty(property: Property): property is MarkerValueProperty {
-    return property.propertyValueType === PropertyValueType.MARKER;
+function isMarkerProperty(property: any): property is MarkerValueProperty {
+    return isProperty(property) && property.propertyValueType === PropertyValueType.MARKER;
 }
 
 export default isMarkerProperty;
