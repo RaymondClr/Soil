@@ -14,6 +14,7 @@ export const pathUserData = Folder.userData;
 
 export const IS_KEY_LABEL_EXISTS = parseFloat(app.version) > 22.5;
 export const PROPERTY_INTERPOLATION_TYPE = [6612 /* KeyframeInterpolationType.LINEAR */, 6613 /* KeyframeInterpolationType.BEZIER */, 6614 /* KeyframeInterpolationType.HOLD */] as const;
+export const SPATIAL_PROPERTY_VALUE_TYPE = [PropertyValueType.ThreeD_SPATIAL, PropertyValueType.TwoD_SPATIAL];
 
 export const reScriptFileName = /\.(js|jsx|jsxbin)$/i;
 export const rePrefsKeyName = /"([^"]+?)"/;

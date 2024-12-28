@@ -393,6 +393,7 @@ export { default as isSolidItem } from "./isSolidItem";
 export { default as isSolidLayer } from "./isSolidLayer";
 export { default as isSolidSource } from "./isSolidSource";
 export { default as isSourceFileMissing } from "./isSourceFileMissing";
+export { default as isSpatialProperty } from "./isSpatialProperty";
 export { default as isTextDocument } from "./isTextDocument";
 export { default as isTextDocumentProperty } from "./isTextDocumentProperty";
 export { default as isTextLayer } from "./isTextLayer";

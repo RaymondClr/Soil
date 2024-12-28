@@ -1,4 +1,4 @@
-// Raymond Yan (raymondclr@foxmail.com / qq: 1107677019) - 2024/11/21 10:30:30
+// Raymond Yan (raymondclr@foxmail.com / qq: 1107677019) - 2024/12/28 22:07:17
 // 哔哩哔哩：https://space.bilibili.com/634669（无名打字猿）
 // 爱发电：https://afdian.net/a/raymondclr
 
@@ -13,6 +13,16 @@
     var MAX_SAFE_INTEGER = 9007199254740991;
     function has(object, key) {
         return object != null && hasOwnProperty.call(object, key);
+    }
+    function contains(array, value) {
+        var index = -1;
+        var length = array.length;
+        while (++index < length) {
+            if (array[index] === value) {
+                return true;
+            }
+        }
+        return false;
     }
     function getTag(value) {
         if (value == null) {
@@ -92,15 +102,16 @@
     }
     var pathDesktop = Folder.desktop;
     var IS_KEY_LABEL_EXISTS = parseFloat(app.version) > 22.5;
+    var SPATIAL_PROPERTY_VALUE_TYPE = [ PropertyValueType.ThreeD_SPATIAL, PropertyValueType.TwoD_SPATIAL ];
     var reTemplateString = /\$\{(\d+)\}/g;
     var isCompItem = createIsNativeType(CompItem);
+    var isProperty = createIsNativeType(Property);
     function isCustomValueProperty(property) {
-        return property.propertyValueType === PropertyValueType.CUSTOM_VALUE;
+        return isProperty(property) && property.propertyValueType === PropertyValueType.CUSTOM_VALUE;
     }
     function isNoValueProperty(property) {
-        return property.propertyValueType === PropertyValueType.NO_VALUE;
+        return isProperty(property) && property.propertyValueType === PropertyValueType.NO_VALUE;
     }
-    var isProperty = createIsNativeType(Property);
     function canSetPropertyValue(property) {
         return isProperty(property) && !isNoValueProperty(property) && !isCustomValueProperty(property);
     }
@@ -117,7 +128,7 @@
     function newFolder(path) {
         return new Folder(path);
     }
-    function getKeyframeValueByIndex(property, keyIndex, isSpatialValue, isCustomValue) {
+    function getKeyframeValueByIndex(property, keyIndex, hasSpatialValue, isCustomValue) {
         return {
             keyTime: property.keyTime(keyIndex),
             keyValue: isCustomValue ? null : property.keyValue(keyIndex),
@@ -128,26 +139,23 @@
             keyTemporalAutoBezier: property.keyTemporalAutoBezier(keyIndex),
             keyInInterpolationType: property.keyInInterpolationType(keyIndex),
             keyOutInterpolationType: property.keyOutInterpolationType(keyIndex),
-            keyInSpatialTangent: isSpatialValue ? property.keyInSpatialTangent(keyIndex) : null,
-            keyOutSpatialTangent: isSpatialValue ? property.keyOutSpatialTangent(keyIndex) : null,
-            keySpatialAutoBezier: isSpatialValue ? property.keySpatialAutoBezier(keyIndex) : null,
-            keySpatialContinuous: isSpatialValue ? property.keySpatialContinuous(keyIndex) : null,
-            keyRoving: isSpatialValue ? property.keyRoving(keyIndex) : null,
+            keyInSpatialTangent: hasSpatialValue ? property.keyInSpatialTangent(keyIndex) : null,
+            keyOutSpatialTangent: hasSpatialValue ? property.keyOutSpatialTangent(keyIndex) : null,
+            keySpatialAutoBezier: hasSpatialValue ? property.keySpatialAutoBezier(keyIndex) : null,
+            keySpatialContinuous: hasSpatialValue ? property.keySpatialContinuous(keyIndex) : null,
+            keyRoving: hasSpatialValue ? property.keyRoving(keyIndex) : null,
             keyLabel: IS_KEY_LABEL_EXISTS ? property.keyLabel(keyIndex) : null
         };
     }
-    function isColorProperty(property) {
-        return property.propertyValueType === PropertyValueType.COLOR;
-    }
     function getKeyframeValues(property, predicate) {
         var func = isFunction(predicate) ? predicate : stubTrue;
-        var isSpatialValue = property.isSpatial && !isColorProperty(property);
-        var isCustomValue = isCustomValueProperty(property);
+        var hasSpatialValue = contains(SPATIAL_PROPERTY_VALUE_TYPE, property.propertyValueType);
+        var hasCustomValue = isCustomValueProperty(property);
         var result = [];
         times(property.numKeys, function(index) {
             var keyIndex = index + 1;
             if (func(property, keyIndex)) {
-                result.push(getKeyframeValueByIndex(property, keyIndex, isSpatialValue, isCustomValue));
+                result.push(getKeyframeValueByIndex(property, keyIndex, hasSpatialValue, hasCustomValue));
             }
         });
         return result;

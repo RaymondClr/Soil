@@ -88,7 +88,7 @@ declare type AnyObject = _Record<string, any>;
 declare type AnyFunction = (...args: Array<any>) => any;
 
 declare type PropertyName = string | number;
-declare type PropertyKey = PropertyName
+declare type PropertyKey = PropertyName;
 declare type PropertyPath = Many<PropertyName>;
 
 declare type ArrayIterator<T, TResult> = (value: T, index: number, collection: T[]) => TResult;
@@ -107,6 +107,7 @@ declare type OutTemporalEase = GetReturnType<Property["keyOutTemporalEase"]>;
 declare type InSpatialTangent = GetReturnType<Property["keyInSpatialTangent"]>;
 declare type OutSpatialTangent = GetReturnType<Property["keyOutSpatialTangent"]>;
 declare type CanSetValueProperty = Property<ThreeDType | TwoDType | TwoDSpatialType | ThreeDSpatialType | OneDType | ColorType | MarkerValueType | ShapePropertyType | TextDocumentType | MaskIndexType | LayerIndexType>;
+declare type SpatialProperty = Property<TwoDSpatialType | ThreeDSpatialType>;
 declare type Predicate<T> = (...value: T[]) => boolean;
 declare type Iteratee<T, R> = (...value: T[]) => R;
 declare interface ThreeDSpatialType extends PropertyClassMembers {
@@ -210,27 +211,25 @@ declare interface LayerIndexType extends PropertyClassMembers {
     value: number;
 }
 
-
 type Fn = (...args: any) => any;
 type OverloadReturns<F extends Fn> = ReturnType<OverloadSignatures<F>>;
 type OverloadParameters<F extends Fn> = Parameters<OverloadSignatures<F>>;
 type MatchOverload<F extends Fn, P extends Fn> = Extract<OverloadSignatures<F>, P>;
 type OverloadSignatures<F extends Fn> = OverloadsToTuple<F>[number];
-type OverloadsToTuple<T> =
-  | T extends { (...args: infer P1): infer R1; (...args: infer P2): infer R2; (...args: infer P3): infer R3; (...args: infer P4): infer R4; (...args: infer P5): infer R5; (...args: infer P6): infer R6; (...args: infer P7): infer R7; (...args: infer P8): infer R8; } 
-  ? [ (...args: P1) => R1, (...args: P2) => R2, (...args: P3) => R3, (...args: P4) => R4, (...args: P5) => R5, (...args: P6) => R6, (...args: P7) => R7, (...args: P8) => R8, ] 
-  : T extends { (...args: infer P1): infer R1; (...args: infer P2): infer R2; (...args: infer P3): infer R3; (...args: infer P4): infer R4; (...args: infer P5): infer R5; (...args: infer P6): infer R6; (...args: infer P7): infer R7; } 
-  ? [ (...args: P1) => R1, (...args: P2) => R2, (...args: P3) => R3, (...args: P4) => R4, (...args: P5) => R5, (...args: P6) => R6, (...args: P7) => R7, ] 
-  : T extends { (...args: infer P1): infer R1; (...args: infer P2): infer R2; (...args: infer P3): infer R3; (...args: infer P4): infer R4; (...args: infer P5): infer R5; (...args: infer P6): infer R6; } 
-  ? [ (...args: P1) => R1, (...args: P2) => R2, (...args: P3) => R3, (...args: P4) => R4, (...args: P5) => R5, (...args: P6) => R6, ] 
-  : T extends { (...args: infer P1): infer R1; (...args: infer P2): infer R2; (...args: infer P3): infer R3; (...args: infer P4): infer R4; (...args: infer P5): infer R5; } 
-  ? [ (...args: P1) => R1, (...args: P2) => R2, (...args: P3) => R3, (...args: P4) => R4, (...args: P5) => R5, ] 
-  : T extends { (...args: infer P1): infer R1; (...args: infer P2): infer R2; (...args: infer P3): infer R3; (...args: infer P4): infer R4; } 
-  ? [ (...args: P1) => R1, (...args: P2) => R2, (...args: P3) => R3, (...args: P4) => R4, ] 
-  : T extends { (...args: infer P1): infer R1; (...args: infer P2): infer R2; (...args: infer P3): infer R3; } 
-  ? [ (...args: P1) => R1, (...args: P2) => R2, (...args: P3) => R3, ] 
-  : T extends { (...args: infer P1): infer R1; (...args: infer P2): infer R2; } 
-  ? [ (...args: P1) => R1, (...args: P2) => R2, ] 
-  : T extends { (...args: infer P1): infer R1; } 
-  ? [ (...args: P1) => R1, ] 
-  : never;
+type OverloadsToTuple<T> = T extends { (...args: infer P1): infer R1; (...args: infer P2): infer R2; (...args: infer P3): infer R3; (...args: infer P4): infer R4; (...args: infer P5): infer R5; (...args: infer P6): infer R6; (...args: infer P7): infer R7; (...args: infer P8): infer R8 }
+    ? [(...args: P1) => R1, (...args: P2) => R2, (...args: P3) => R3, (...args: P4) => R4, (...args: P5) => R5, (...args: P6) => R6, (...args: P7) => R7, (...args: P8) => R8]
+    : T extends { (...args: infer P1): infer R1; (...args: infer P2): infer R2; (...args: infer P3): infer R3; (...args: infer P4): infer R4; (...args: infer P5): infer R5; (...args: infer P6): infer R6; (...args: infer P7): infer R7 }
+    ? [(...args: P1) => R1, (...args: P2) => R2, (...args: P3) => R3, (...args: P4) => R4, (...args: P5) => R5, (...args: P6) => R6, (...args: P7) => R7]
+    : T extends { (...args: infer P1): infer R1; (...args: infer P2): infer R2; (...args: infer P3): infer R3; (...args: infer P4): infer R4; (...args: infer P5): infer R5; (...args: infer P6): infer R6 }
+    ? [(...args: P1) => R1, (...args: P2) => R2, (...args: P3) => R3, (...args: P4) => R4, (...args: P5) => R5, (...args: P6) => R6]
+    : T extends { (...args: infer P1): infer R1; (...args: infer P2): infer R2; (...args: infer P3): infer R3; (...args: infer P4): infer R4; (...args: infer P5): infer R5 }
+    ? [(...args: P1) => R1, (...args: P2) => R2, (...args: P3) => R3, (...args: P4) => R4, (...args: P5) => R5]
+    : T extends { (...args: infer P1): infer R1; (...args: infer P2): infer R2; (...args: infer P3): infer R3; (...args: infer P4): infer R4 }
+    ? [(...args: P1) => R1, (...args: P2) => R2, (...args: P3) => R3, (...args: P4) => R4]
+    : T extends { (...args: infer P1): infer R1; (...args: infer P2): infer R2; (...args: infer P3): infer R3 }
+    ? [(...args: P1) => R1, (...args: P2) => R2, (...args: P3) => R3]
+    : T extends { (...args: infer P1): infer R1; (...args: infer P2): infer R2 }
+    ? [(...args: P1) => R1, (...args: P2) => R2]
+    : T extends { (...args: infer P1): infer R1 }
+    ? [(...args: P1) => R1]
+    : never;

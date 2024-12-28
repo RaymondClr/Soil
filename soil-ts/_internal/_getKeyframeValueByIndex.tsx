@@ -1,6 +1,6 @@
 import { IS_KEY_LABEL_EXISTS } from "./_global";
 
-function getKeyframeValueByIndex(property: Property, keyIndex: number, isSpatialValue: boolean, isCustomValue: boolean): Keyframe {
+function getKeyframeValueByIndex(property: Property, keyIndex: number, hasSpatialValue: boolean, isCustomValue: boolean): Keyframe {
     return {
         keyTime: property.keyTime(keyIndex),
         keyValue: isCustomValue ? null : property.keyValue(keyIndex),
@@ -11,11 +11,11 @@ function getKeyframeValueByIndex(property: Property, keyIndex: number, isSpatial
         keyTemporalAutoBezier: property.keyTemporalAutoBezier(keyIndex),
         keyInInterpolationType: property.keyInInterpolationType(keyIndex),
         keyOutInterpolationType: property.keyOutInterpolationType(keyIndex),
-        keyInSpatialTangent: isSpatialValue ? property.keyInSpatialTangent(keyIndex) : null,
-        keyOutSpatialTangent: isSpatialValue ? property.keyOutSpatialTangent(keyIndex) : null,
-        keySpatialAutoBezier: isSpatialValue ? property.keySpatialAutoBezier(keyIndex) : null,
-        keySpatialContinuous: isSpatialValue ? property.keySpatialContinuous(keyIndex) : null,
-        keyRoving: isSpatialValue ? property.keyRoving(keyIndex) : null,
+        keyInSpatialTangent: hasSpatialValue ? property.keyInSpatialTangent(keyIndex) : null,
+        keyOutSpatialTangent: hasSpatialValue ? property.keyOutSpatialTangent(keyIndex) : null,
+        keySpatialAutoBezier: hasSpatialValue ? property.keySpatialAutoBezier(keyIndex) : null,
+        keySpatialContinuous: hasSpatialValue ? property.keySpatialContinuous(keyIndex) : null,
+        keyRoving: hasSpatialValue ? property.keyRoving(keyIndex) : null,
         keyLabel: IS_KEY_LABEL_EXISTS ? property.keyLabel(keyIndex) : null,
     };
 }

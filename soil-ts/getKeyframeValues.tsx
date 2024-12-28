@@ -2,8 +2,9 @@ import stubTrue from "./lodash/basic/stubTrue";
 import isFunction from "./lodash/#isFunction";
 import times from "./lodash/#times";
 import getKeyframeValueByIndex from "./_internal/_getKeyframeValueByIndex";
-import isColorProperty from "./isColorProperty";
 import isCustomValueProperty from "./isCustomValueProperty";
+import { contains } from "./soil";
+import { SPATIAL_PROPERTY_VALUE_TYPE } from "./_internal/_global";
 
 /**
  * 获取关键帧的所有值
@@ -34,13 +35,13 @@ import isCustomValueProperty from "./isCustomValueProperty";
  */
 function getKeyframeValues<T extends CanSetValueProperty>(property: T, predicate?: (property: T, keyIndex: number) => boolean): Array<Keyframe> {
     const func = isFunction(predicate) ? predicate : stubTrue;
-    const isSpatialValue = property.isSpatial && !isColorProperty(property);
-    const isCustomValue = isCustomValueProperty(property);
+    const hasSpatialValue = contains(SPATIAL_PROPERTY_VALUE_TYPE, property.propertyValueType);
+    const hasCustomValue = isCustomValueProperty(property);
     const result: Array<Keyframe> = [];
-    times(property.numKeys, (index) => {
+    times(property.numKeys, index => {
         let keyIndex = index + 1;
         if (func(property, keyIndex)) {
-            result.push(getKeyframeValueByIndex(property, keyIndex, isSpatialValue, isCustomValue));
+            result.push(getKeyframeValueByIndex(property, keyIndex, hasSpatialValue, hasCustomValue));
         }
     });
     return result;
